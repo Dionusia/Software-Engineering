@@ -1,0 +1,77 @@
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class LoginPage {
+    
+    private Map<String, String> users;
+
+    public LoginPage() {
+        users = new HashMap<String, String>();
+        // manually test for users login
+        users.put("Dionusia", "1234");
+        users.put("Stelios", "1234");
+        users.put("Aggelos", "1234");
+    }
+
+    public void register() {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.println("Enter your username:");
+            String username = scanner.nextLine();
+            if (username.isEmpty()) {
+                System.out.println("Invalid username. Please try again.");
+                System.exit(0); // Exit the program
+            }
+            System.out.println("Enter your password:");
+            String password = scanner.nextLine();
+            if (password.isEmpty()) {
+                System.out.println("Invalid password. Please try again.");
+                System.exit(0); // Exit the program
+            }
+            users.put(username, password);
+            System.out.println("Registration successful!");
+            System.exit(0); // Exit the program
+        } finally {
+            scanner.close();
+        }
+    }
+    
+    public void login() {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.println("Enter your username:");
+            String username = scanner.nextLine();
+            System.out.println("Enter your password:");
+            String password = scanner.nextLine();
+            if (users.containsKey(username) && users.get(username).equals(password)) {
+                System.out.println("Login successful!");
+            } else {
+                System.out.println("Invalid username or password.");
+            }
+        } finally {
+            scanner.close();
+        }
+    }
+
+    public static void main(String[] args) {
+        LoginPage loginPage = new LoginPage();
+        try (Scanner scanner = new Scanner(System.in)) {
+            boolean isLoggedIn = false;
+            while (!isLoggedIn) {
+                System.out.println("Enter 1 to register or 2 to login:");
+                int choice = scanner.nextInt();
+                scanner.nextLine();
+                if (choice == 1) {
+                    loginPage.register();
+                } else if (choice == 2) {
+                    loginPage.login();
+                    isLoggedIn = true;
+                } else {
+                    System.out.println("Invalid choice.");
+                }
+            }
+        }
+    }
+}
