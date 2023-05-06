@@ -1,0 +1,48 @@
+title track water intake
+
+actor client
+
+participant LoginPage
+participant WaterTracker
+participant WaterImport
+participant User
+participant WaterIntakeHistory
+
+client->LoginPage: click on login button
+activate client
+client<--LoginPage: successfully loged in
+
+client->WaterTracker: selects
+client<--WaterTracker: displaysIntake()
+
+client->WaterImport: selects
+client<--WaterImport: displayPromptImport()
+client->WaterImport: import()
+
+WaterImport->User: checkDetails()
+
+alt case 2
+WaterImport<--User:user haven't insert details
+client<--WaterImport: prompts to update profile
+client->WaterImport: updates his profile
+end
+WaterImport<--User: details ok
+WaterImport->WaterImport: calculateTotalWaterIntake()
+WaterTracker<--WaterImport: save()
+
+WaterTracker->WaterTracker: checkIfGoalReached()
+
+client<--WaterTracker: display message
+
+client->WaterIntakeHistory: selectsHistory()
+
+client<--WaterIntakeHistory: displayHistory()
+
+alt case 1
+client->WaterIntakeHistory: modifyEntry()  or deleteEntry()
+WaterIntakeHistory->WaterIntakeHistory:modifies()  or deletes()
+
+else case 3
+client->WaterIntakeHistory:filterHistoryByDateRange()
+client<--WaterIntakeHistory: displayHistory()
+end

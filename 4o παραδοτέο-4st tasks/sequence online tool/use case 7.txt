@@ -1,0 +1,51 @@
+title view rewards and points
+
+actor client
+
+participant LoginPage
+participant RewardSystem
+participant PointsHistory
+participant PointsBalance
+participant SocialMedia
+
+client->LoginPage: click on login button
+activate client
+client<--LoginPage: successfully loged in
+
+client->RewardSystem:selects rewards
+client<--RewardSystem: displayPointsAndRewards()
+alt case 1
+client<--RewardSystem: display message not earned points yet
+client<--RewardSystem: provideFeedback()
+end
+client->PointsHistory: selectsHistory
+client<--PointsHistory: displayHistory()
+
+client->RewardSystem:browse available rewards
+client<--RewardSystem: giveSelectionOption()
+client->RewardSystem: selects a reward()
+RewardSystem->PointsBalance: checkPoints()
+RewardSystem<--PointsBalance: return()
+alt case 1
+client<--RewardSystem:sendNotification not enough points
+end
+
+client<--RewardSystem: displayInfo()
+client->RewardSystem: selectsCashIn()
+
+
+alt case 2
+RewardSystem->RewardSystem: expireReward()
+client<--RewardSystem: message not available reward due to expire
+
+else case 3
+client->RewardSystem: selectShareOption()
+RewardSystem->SocialMedia: optionToShare()
+client<--SocialMedia: share()
+client->RewardSystem: shares the reward
+RewardSystem->RewardSystem: markedAsShared()
+end
+client<--RewardSystem: confirms the redemption
+RewardSystem->PointsBalance: removePoints()
+client<--RewardSystem: redemptionInstructions()
+client->RewardSystem: claim the reward by following the instructions

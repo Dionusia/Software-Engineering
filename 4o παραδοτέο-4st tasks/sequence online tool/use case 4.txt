@@ -1,0 +1,37 @@
+title communicate with instructors and other users
+
+actor client
+actor instructor
+
+participant LoginPage
+participant ChatMessage
+
+
+
+client->LoginPage: click on login button
+activate client
+client<--LoginPage: successfully loged in
+
+client->ChatMessage: chooses chat
+client<--ChatMessage: displayListOfUser()
+client->ChatMessage: selects with whom to chat
+ChatMessage->ChatMessage:openConversation()
+client<--ChatMessage: enableTyping()
+client->ChatMessage: sendsMessage()
+instructor<--ChatMessage:receivesMessage()
+client<--ChatMessage: receivesMessage()
+
+alt case 1
+client<--ChatMessage: notificationPopUp()
+else case 2
+client<--ChatMessage:notificationUnavailableUser()
+else case 3
+client->ChatMessage: searchFunction()
+else case 4
+client->ChatMessage: groupChat()
+end
+
+
+
+
+

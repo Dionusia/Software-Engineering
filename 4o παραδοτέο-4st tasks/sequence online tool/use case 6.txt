@@ -1,0 +1,44 @@
+title provide feedback and reviews
+
+actor client
+actor instructor
+
+participant LoginPage
+participant InstructorListPage
+participant Review
+participant ReviewInstructor
+participant Feedback
+participant ChatMessage
+
+client->LoginPage: click on login button
+activate client
+client<--LoginPage: successfully loged in
+
+client->InstructorListPage: findsInstructor()
+client->Review: selects the option to leave a review and rating
+alt case 1
+client->Review: selects the option to edit his review
+client<--Review: prompts the user to update their rating and written review.
+client->Review:inform&submit()
+end
+client<--Review: prompt the user to leave a rating and write a review
+client->Review:write&submitReview()
+alt case 1
+client<--Review: prompt to rate before confirm
+client->Review: rate()
+client<--Review:submit again()
+end
+client<--Review:askConfirmation()
+client->Review:confrims()
+Review->ReviewInstructor: calculateRating()
+ReviewInstructor->Feedback: save()
+instructor<--ReviewInstructor: sendsNotification()
+instructor<--Feedback: displayRatings()
+instructor->Feedback: sees and answers()
+
+alt case 1
+instructor->Feedback:disputes a review
+client<--Feedback: send notification()
+ReviewInstructor<--Feedback:removeReview()
+ReviewInstructor->ChatMessage: createConversation()
+end

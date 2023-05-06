@@ -1,0 +1,69 @@
+title participate in challenges
+
+actor client
+actor instructor
+
+participant LoginPage
+participant Challenge
+participant ProgressTracker
+participant ChatMessage
+participant RewardSystem
+participant SearchChallenge
+
+client->LoginPage: click on login button
+activate client
+client<--LoginPage: successfully loged in
+
+client->Challenge: selectsChallenges()
+client<--Challenge: displayListOfChallenges()
+
+client->Challenge: selects a challenge
+
+alt case 1
+client->client:can't find a challenge
+client->SearchChallenge: searchChallenge()
+client<--SearchChallenge: searchResults()
+end
+
+client<--Challenge: provideDescription()
+
+client->Challenge: accepts the terms
+
+alt case 2
+client->Challenge: doesn't accept terms
+client<--Challenge: can't take part
+end
+
+client->ProgressTracker: startsTheChallenge()
+
+alt case 3
+client->ProgressTracker:QuitChallenge()
+client<--ProgressTracker: confirm the selection
+client->ProgressTracker: confirms()
+ProgressTracker->ProgressTracker: finishChallenge()
+client<--ProgressTracker: ask for brief reasons
+
+else case 5
+
+client->ProgressTracker:feels pain or discomfort
+client<-ProgressTracker:ask for modifies
+client->ProgressTracker: modifyProgram()
+Challenge<--ProgressTracker: makeModifications()
+client<--Challenge: display to client()
+
+end
+client<--ProgressTracker: provideFeedback()  && provideEncouragement()
+
+client->ChatMessage: communicateWithInstructor
+instructor<--ChatMessage: client needs help with challenge
+instructor->ChatMessage: provideFeedback()
+client<--ChatMessage: receiveFeedback()
+
+client->ProgressTracker: completeChallenge()
+
+alt case 4
+client->ProgressTracker: doesn't complete
+client<--ProgressTracker: receiveFeedback()
+end
+Challenge->RewardSystem: inform for challenge completion
+client<--RewardSystem: rewards()

@@ -1,0 +1,54 @@
+title view and select recipes
+
+actor client
+
+participant LoginPage
+participant Recipes
+participant RecommendedRecipes
+participant PersonalRecipeCollection
+participant SocialMedia
+participant NewRecipe
+participant SearchedRecipe
+participant ReviewRecipe
+
+
+client->LoginPage: click on login button
+activate client
+client<--LoginPage: successfully loged in
+
+client->Recipes: selectsRecipes()
+
+alt case 1
+client->SearchedRecipe: searchIngridient()
+Recipes<--SearchedRecipe: MatchSearch()
+client<--Recipes: displayRecipes()
+end
+
+Recipes->RecommendedRecipes: <<create>>
+Recipes<--RecommendedRecipes: save()
+
+client<--Recipes: displayRecipes()
+
+alt case 2
+client->ReviewRecipe: leavesReview()
+
+else case 3
+client->Recipes: can't eat an ingredient
+Recipes->SubstitutedIngredient: <<create>>
+client<--SubstitutedIngredient: show()
+client->Recipes:modifyRecipe()
+end
+
+client->Recipes: modifyRecipe()
+
+client<--Recipes: give permissions()
+
+client->PersonalRecipeCollection: saveRecipe()
+client->SocialMedia: shareOptions()
+client->NewRecipe: selects to create recipe
+client<--NewRecipe: giveInstructions()
+client->NewRecipe: givesInstructions()
+NewRecipe->NewRecipe:<<create>>
+client<--NewRecipe: give permissions()
+client->PersonalRecipeCollection: saveNewRecipe()
+

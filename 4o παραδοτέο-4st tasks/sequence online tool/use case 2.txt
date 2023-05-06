@@ -1,0 +1,56 @@
+title view and select fitness and diet meal programs
+
+actor client
+actor instructor
+
+participant LoginPage
+participant RecommedPrograms
+participant Questionnaire
+participant DietProgram
+participant FitnessProgram
+participant ChatMessage
+
+
+client->LoginPage: click on the login button
+activate client
+client<--LoginPage:successfully logged in
+
+client->RecommedPrograms: selects()
+client<--RecommedPrograms: to continue fill the questionnaire
+
+client->Questionnaire: fillQuestionnaire()
+Questionnaire->Questionnaire: saveAnswers()
+
+RecommedPrograms<--Questionnaire: <<create>>
+
+client<--RecommedPrograms: displayPrograms()
+
+alt case 1
+client->ChatMessage: communicateWithInstructor()
+instructor<--ChatMessage: client ask for modifies due to dietary restrictions
+instructor->instructor: modify meal program()
+instructor->ChatMessage: communicateWithClient()
+
+else case 2
+client->ChatMessage: communicateWithInstructor()
+instructor<--ChatMessage: client ask for modifies because he doesn't like the diet program
+instructor->instructor: modify meal program()
+instructor->ChatMessage: communicateWithClient()
+
+else case 3
+client->client: can't complete an exercise
+client->ChatMessage: communicateWithInstructor()
+instructor<--ChatMessage: client ask for modifies fitness program
+instructor->instructor: modify fitness program()
+instructor->ChatMessage: communicateWithClient()
+end
+
+client->DietProgram: selectsDietPrograms()
+client<--DietProgram: display recommended meals and portion sizes()
+client->DietProgram: modify meal program()
+
+
+client->FitnessProgram: selectsFitnessPrograms()
+client<--FitnessProgram: display recommended exercises and sets/repetitions()
+client->FitnessProgram: show video demonstrations and written instructions for exercises()
+client->FitnessProgram:  modify fitness program()
