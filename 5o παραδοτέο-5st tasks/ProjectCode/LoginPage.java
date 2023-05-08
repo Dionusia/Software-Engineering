@@ -23,6 +23,7 @@ public class LoginPage{
        try{   
         String username;   
         String password;  
+     
            do{
             false_crend=true;
              System.out.println("-----------Ender your name------- :");
@@ -51,8 +52,9 @@ public class LoginPage{
              System.out.println("You want to be level : ");
              String level = scaner.nextLine(); 
              System.out.println("Your Age is : ");
-             int age = scaner.nextInt();
-            // scaner.nextLine();
+             int age= scaner.nextInt();
+
+        
                
                  if(false_crend){
                     users.put(username,new Entry(password,age,gender,level));
@@ -61,14 +63,15 @@ public class LoginPage{
                  }
            
         }finally {
-              scaner.close();
+          // scaner.close();
              }
+                
     }
 
 public void Login(){
         Scanner scaner = new Scanner(System.in);
           try{
-              System.out.println("Ender toyr name  :");
+              System.out.println("Ender your name  :");
               String username =  scaner.nextLine();
               System.out.println("Ender your password  :");
               String password = scaner.nextLine();
@@ -86,22 +89,32 @@ public void Login(){
 
  public static void main(String[] args){
         LoginPage loginpage=  new LoginPage();
-        Scanner scaner = new Scanner(System.in);
+        Scanner scaner= new Scanner(System.in);
     try{
            
-           int choise=0;
+           String  choise1=null;
+           int choise=1;
            boolean isLogin=false;
+           boolean reg=false;
+
         while(!isLogin){
             System.out.println("##############  MAKE YOUR BALANCE  ##############");
+            if(!reg){
             System.out.println("-Enter 1 for register-");
+            }
             System.out.println("-Enter 2 for Login-");
             System.out.println("-Ënder 3 for exit-");
+            
+        
+             choise1 = scaner.nextLine();
+             choise = Integer.parseInt(choise1); 
            
-            choise = scaner.nextInt();
-                     
+        
+             
+            
             if(choise == 1){
                loginpage.register();
-               isLogin=true;
+               reg=true;
              }else if(choise ==2){
                loginpage.Login();
                isLogin=true;
@@ -151,8 +164,6 @@ public void Login(){
             this.age = age;
             this.gender = gender;
             this.level=level;
-
-
         }
 
         public String getPassword() {
