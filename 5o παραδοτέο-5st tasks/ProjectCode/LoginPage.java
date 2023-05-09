@@ -136,8 +136,9 @@ public void Login(Scanner scaner){
                     System.out.println("Level: " + value.getLevel());
                     System.out.println("--------------------");
                 
-              
-                  }    
+                  
+                  }  
+                      break;
             }else{
                 System.out.println("invalid choise");
 
