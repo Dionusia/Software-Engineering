@@ -16,9 +16,9 @@ public class LoginPage{
         users.put("Aggelos",new Entry("1234",21,"Male","H"));
      }
 
-     //ηλικία, το φύλο, το ύψος, το βάρος και το επίπεδο δραστηριότητας, το 
-  public void register(){
-       Scanner scaner= new Scanner(System.in);
+    
+  public void register(Scanner scaner){
+    
        Boolean false_crend;//an den exei eisagei tipota false
        try{   
         String username;   
@@ -52,7 +52,8 @@ public class LoginPage{
              System.out.println("You want to be level : ");
              String level = scaner.nextLine(); 
              System.out.println("Your Age is : ");
-             int age= scaner.nextInt();
+             String  temp= scaner.nextLine();
+             int age =Integer.parseInt(temp);
 
         
                
@@ -63,13 +64,13 @@ public class LoginPage{
                  }
            
         }finally {
-          // scaner.close();
+         //  scaner.close();
              }
                 
     }
 
-public void Login(){
-        Scanner scaner = new Scanner(System.in);
+public void Login(Scanner scaner){
+       
           try{
               System.out.println("Ender your name  :");
               String username =  scaner.nextLine();
@@ -89,7 +90,7 @@ public void Login(){
 
  public static void main(String[] args){
         LoginPage loginpage=  new LoginPage();
-        Scanner scaner= new Scanner(System.in);
+        final Scanner scaner= new Scanner(System.in);
     try{
            
            String  choise1=null;
@@ -104,23 +105,39 @@ public void Login(){
             }
             System.out.println("-Enter 2 for Login-");
             System.out.println("-Ënder 3 for exit-");
-            
+            System.out.println("-Ënder 4 to view users-");
         
              choise1 = scaner.nextLine();
              choise = Integer.parseInt(choise1); 
            
         
+     //print all user,if do registration you will see new user 
+   
              
             
             if(choise == 1){
-               loginpage.register();
+               loginpage.register(scaner);
                reg=true;
              }else if(choise ==2){
-               loginpage.Login();
+               loginpage.Login(scaner);
                isLogin=true;
             }else if(choise ==3){
                 System.out.println("======== by ===========");
                 break;
+            }else if(choise==4){
+                for (Map.Entry<String, Entry> entry : loginpage.users.entrySet()) {
+                    String key = entry.getKey();
+                    Entry value = entry.getValue();
+            
+                    System.out.println("username: " + key);
+                    System.out.println("password: " + value.getPassword());
+                    System.out.println("Age: " + value.getAge());
+                    System.out.println("Gender: " + value.getGender());
+                    System.out.println("Level: " + value.getLevel());
+                    System.out.println("--------------------");
+                
+              
+                  }    
             }else{
                 System.out.println("invalid choise");
 
@@ -131,23 +148,10 @@ public void Login(){
             scaner.close();
         }
         
+   
+
+
     }
-     //print all user,if do registration you will see new user 
-   /*   for (Map.Entry<String, Entry> entry : loginpage.users.entrySet()) {
-        String key = entry.getKey();
-        Entry value = entry.getValue();
-
-        System.out.println("username: " + key);
-        System.out.println("password: " + value.getPassword());
-        System.out.println("Age: " + value.getAge());
-        System.out.println("Gender: " + value.getGender());
-        System.out.println("Level: " + value.getLevel());
-        System.out.println("--------------------");*/
-    
-  
- 
-
-
 
 
 
@@ -188,6 +192,7 @@ public void Login(){
         }
     }
 }
+
 
 
 
