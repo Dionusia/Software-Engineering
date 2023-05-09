@@ -1,161 +1,130 @@
+
 import java.util.Scanner;
-
-
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginPage{
+public class LoginPage {
 
     private Map<String, Entry> users = new HashMap<>();
-      //Entry e= new Entry();
-     public LoginPage(){
-        users =  new HashMap<String,Entry>();
-        users.put("stelios",new Entry("1234",42,"Male","H"));
-        users.put("Dionisia",new Entry("1234",21,"female","H"));
-        users.put("Aggelos",new Entry("1234",21,"Male","H"));
-     }
 
-    
-  public void register(Scanner scaner){
-    
-       Boolean false_crend;//an den exei eisagei tipota false
-       try{   
-        String username;   
-        String password;  
-     
-           do{
-            false_crend=true;
-             System.out.println("-----------Ender your name------- :");
-             username = scaner.nextLine();
-          
-             if(username.isEmpty()){
-                    System.out.println("Your username is not valid");
-                    System.out.println("try again");
-                    false_crend=false;
-                 }
-            }while(!false_crend);
-             
-          do{
-              false_crend=true;
-              System.out.println("-----------Ender your password--- :");
-               password =scaner.nextLine();
-               if(password.isEmpty()){
-                    System.out.println("Your password is not valid");
-                    System.out.println("try again");
-                    false_crend=false;
-              }
-             }while(!false_crend);
-
-             System.out.println("Your gender is :");
-             String gender = scaner.nextLine();
-             System.out.println("You want to be level : ");
-             String level = scaner.nextLine(); 
-             System.out.println("Your Age is : ");
-             String  temp= scaner.nextLine();
-             int age =Integer.parseInt(temp);
-
-        
-               
-                 if(false_crend){
-                    users.put(username,new Entry(password,age,gender,level));
-                    System.out.println("Your registration succesful!");
-                    
-                 }
-           
-        }finally {
-         //  scaner.close();
-             }
-                
+    public LoginPage() {
+        users.put("Stelios", new Entry("1234", 42, "Male", "High"));
+        users.put("Dionusia", new Entry("1234", 21, "Female", "High"));
+        users.put("Aggelos", new Entry("1234", 23, "Male", "High"));
     }
 
-public void Login(Scanner scaner){
-       
-          try{
-              System.out.println("Ender your name  :");
-              String username =  scaner.nextLine();
-              System.out.println("Ender your password  :");
-              String password = scaner.nextLine();
-             
-               if( !users.containsKey(username )){
-               System.out.println("Your username or password is invalid");
-               }else{
-                   if(users.containsKey(username ) & users.get(username).getPassword().equals(password) ){
-                        System.out.println("You Login succesful");
-                   }else System.out.println("Your username or password is invalid");
-           }}finally{
-            scaner.close();
-        }
-  }
+    public void register(Scanner scanner) {
+        Boolean falseCrend;
+        try {
+            String username;
+            String password;
 
- public static void main(String[] args){
-        LoginPage loginpage=  new LoginPage();
-        final Scanner scaner= new Scanner(System.in);
-    try{
-           
-           String  choise1=null;
-           int choise=1;
-           boolean isLogin=false;
-           boolean reg=false;
+            do {
+                falseCrend = true;
+                System.out.println("Enter your name:");
+                username = scanner.nextLine();
 
-        while(!isLogin){
-            System.out.println("##############  MAKE YOUR BALANCE  ##############");
-            if(!reg){
-            System.out.println("-Enter 1 for register-");
+                if (username.isEmpty()) {
+                    System.out.println("Your username is not valid. Please try again.");
+                    falseCrend = false;
+                }
+            } while (!falseCrend);
+
+            do {
+                falseCrend = true;
+                System.out.println("Enter your password:");
+                password = scanner.nextLine();
+
+                if (password.isEmpty()) {
+                    System.out.println("Your password is not valid. Please try again.");
+                    falseCrend = false;
+                }
+            } while (!falseCrend);
+
+            System.out.println("Enter your gender:");
+            String gender = scanner.nextLine();
+            System.out.println("Enter your activity level:");
+            String level = scanner.nextLine();
+            System.out.println("Enter your age:");
+            int age = scanner.nextInt();
+
+            if (falseCrend) {
+                users.put(username, new Entry(password, age, gender, level));
+                System.out.println("Registration successful!");
             }
-            System.out.println("-Enter 2 for Login-");
-            System.out.println("-Ënder 3 for exit-");
-            System.out.println("-Ënder 4 to view users-");
-        
-             choise1 = scaner.nextLine();
-             choise = Integer.parseInt(choise1); 
-           
-        
-     //print all user,if do registration you will see new user 
-   
-             
-            
-            if(choise == 1){
-               loginpage.register(scaner);
-               reg=true;
-             }else if(choise ==2){
-               loginpage.Login(scaner);
-               isLogin=true;
-            }else if(choise ==3){
-                System.out.println("======== by ===========");
-                break;
-            }else if(choise==4){
-                for (Map.Entry<String, Entry> entry : loginpage.users.entrySet()) {
-                    String key = entry.getKey();
-                    Entry value = entry.getValue();
-            
-                    System.out.println("username: " + key);
-                    System.out.println("password: " + value.getPassword());
-                    System.out.println("Age: " + value.getAge());
-                    System.out.println("Gender: " + value.getGender());
-                    System.out.println("Level: " + value.getLevel());
-                    System.out.println("--------------------");
-                
-                  
-                  }  
-                      break;
-            }else{
-                System.out.println("invalid choise");
 
-            }
-         }
-
-        }finally{
-            scaner.close();
+        } finally {
+            scanner.nextLine();
         }
-        
-   
-
-
     }
 
+    public void login(){
+        Scanner scanner = new Scanner(System.in);
+        try{
+            System.out.println("Enter your name:");
+            String username = scanner.nextLine();
+            System.out.println("Enter your password:");
+            String password = scanner.nextLine();
+            
+            if (!users.containsKey(username)) {
+                System.out.println("Invalid username or password.");
+            } else {
+                Entry user = users.get(username);
+                if (user.getPassword().equals(password)) {
+                    System.out.println("Login successful!");
+                    Menu menu = new Menu();
+                    menu.run();
+                } else {
+                    System.out.println("Invalid username or password.");
+                }
+            }
+        } finally {
+            scanner.close();
+        }
+    }
 
+    public static void main(String[] args) {
+        LoginPage loginPage = new LoginPage();
+        Scanner scanner = new Scanner(System.in);
+        try {
+            String choiceStr;
+            int choice = 1;
+            boolean isLogin = false;
+            boolean reg = false;
 
+            while (!isLogin) {
+                System.out.println("##############  FIND YOUR BALANCE  ##############");
+                if (!reg) {
+                    System.out.println("Enter 1 to register.");
+                }
+                System.out.println("Enter 2 to log in.");
+                System.out.println("Enter 3 to exit.");
+
+                choiceStr = scanner.nextLine();
+                try {
+                    choice = Integer.parseInt(choiceStr);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid choice.");
+                    continue;
+                }
+
+                if (choice == 1) {
+                    loginPage.register(scanner);
+                    reg = true;
+                } else if (choice == 2) {
+                    loginPage.login();
+                    isLogin = true;
+                } else if (choice == 3) {
+                    System.out.println("Exiting program...");
+                    break;
+                } else {
+                    System.out.println("Invalid choice.");
+                }
+            }
+        } finally {
+            scanner.close();
+        }
+    }
     // Προσαρμοσμένη κλάση για την αποθήκευση των πεδίων
     public  class Entry {
         private String password;
@@ -193,9 +162,3 @@ public void Login(Scanner scaner){
         }
     }
 }
-
-
-
-
-
-    
