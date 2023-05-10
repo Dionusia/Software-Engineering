@@ -64,8 +64,8 @@ public class Menu {
     }
 
     private void foodDiary() {
-        System.out.println("Displaying...");
-        isRunning = false;
+        FoodDiary foodDiary = new FoodDiary();
+        foodDiary.foodDiaryMenu();
     }
 
     private void logOut() {
