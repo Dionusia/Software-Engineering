@@ -8,15 +8,15 @@ public class Instructor extends User {
     }
     
     public void createMealPlan(Client client) {
-        // logic for creating a personalized meal plan for the client
+        // creating a personalized meal plan for the client
     }
     
     public void createFitnessPlan(Client client) {
-        // logic for creating a personalized fitness plan for the client
+        // creating a personalized fitness plan for the client
     }
     
     public void manageClientProfile(Client client) {
-        // logic for managing the client's profile
+        // managing the client's profile
     }
     
     public String getRole() {

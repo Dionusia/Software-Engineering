@@ -70,7 +70,9 @@ public class LoginPage {
             if (role.equals("")) {
                 for (Instructor instructor : instructors) {
                     if (instructor.getUsername().equals(username)) {
-                        System.out.println("MENU INSTRUCTOR");
+                        //System.out.println("MENU INSTRUCTOR");
+                        MenuInstructor menu = new MenuInstructor();
+                        menu.run();
                     }
                 }
             }
