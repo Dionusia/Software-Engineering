@@ -70,6 +70,6 @@ public class Menu {
 
     private void logOut() {
         System.out.println("Logging out...");
-        isRunning = false;
+        LoginPage.main(null);
     }
 }

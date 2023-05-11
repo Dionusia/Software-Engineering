@@ -1,164 +1,146 @@
-
-import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.Scanner;
 
 public class LoginPage {
-
-    private Map<String, Entry> users = new HashMap<>();
-
-    public LoginPage() {
-        users.put("Stelios", new Entry("1234", 42, "Male", "High"));
-        users.put("Dionusia", new Entry("1234", 21, "Female", "High"));
-        users.put("Aggelos", new Entry("1234", 23, "Male", "High"));
-    }
-
-    public void register(Scanner scanner) {
-        Boolean falseCrend;
-        try {
-            String username;
-            String password;
-
-            do {
-                falseCrend = true;
-                System.out.println("Enter your name:");
-                username = scanner.nextLine();
-
-                if (username.isEmpty()) {
-                    System.out.println("Your username is not valid. Please try again.");
-                    falseCrend = false;
-                }
-            } while (!falseCrend);
-
-            do {
-                falseCrend = true;
-                System.out.println("Enter your password:");
-                password = scanner.nextLine();
-
-                if (password.isEmpty()) {
-                    System.out.println("Your password is not valid. Please try again.");
-                    falseCrend = false;
-                }
-            } while (!falseCrend);
-
-            System.out.println("Enter your gender:");
-            String gender = scanner.nextLine();
-            System.out.println("Enter your activity level:");
-            String level = scanner.nextLine();
-            System.out.println("Enter your age:");
-            int age = scanner.nextInt();
-
-            if (falseCrend) {
-                users.put(username, new Entry(password, age, gender, level));
-                System.out.println("Registration successful!");
-            }
-
-        } finally {
-            scanner.nextLine();
-        }
-    }
-
-    public void login(){
-        Scanner scanner = new Scanner(System.in);
-        try{
-            System.out.println("Enter your name:");
-            String username = scanner.nextLine();
-            System.out.println("Enter your password:");
-            String password = scanner.nextLine();
-            
-            if (!users.containsKey(username)) {
-                System.out.println("Invalid username or password.");
-            } else {
-                Entry user = users.get(username);
-                if (user.getPassword().equals(password)) {
-                    System.out.println("Login successful!");
-                    Menu menu = new Menu();
-                    menu.run();
-                } else {
-                    System.out.println("Invalid username or password.");
-                }
-            }
-        } finally {
-            scanner.close();
-        }
-    }
-
+    private static HashMap<String, String> users = new HashMap<>();
+    private static ArrayList<Client> clients = new ArrayList<>();
+    private static ArrayList<Instructor> instructors = new ArrayList<>();
+    private static Scanner scanner = new Scanner(System.in);
+    
     public static void main(String[] args) {
-        LoginPage loginPage = new LoginPage();
-        Scanner scanner = new Scanner(System.in);
-        try {
-            String choiceStr;
-            int choice = 1;
-            boolean isLogin = false;
-            boolean reg = false;
-
-            while (!isLogin) {
-                System.out.println("##############  FIND YOUR BALANCE  ##############");
-                if (!reg) {
-                    System.out.println("Enter 1 to register.");
-                }
-                System.out.println("Enter 2 to log in.");
-                System.out.println("Enter 3 to exit.");
-
-                choiceStr = scanner.nextLine();
-                try {
-                    choice = Integer.parseInt(choiceStr);
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid choice.");
-                    continue;
-                }
-
-                if (choice == 1) {
-                    loginPage.register(scanner);
-                    reg = true;
-                } else if (choice == 2) {
-                    loginPage.login();
-                    isLogin = true;
-                } else if (choice == 3) {
-                    System.out.println("Exiting program...");
+        // create some clients and instructors
+        Client client1 = new Client("stelios", "1234", 42, "male", 180, 75.0, "moderate", "vegetarian", "lose weight");
+        Client client2 = new Client("dionusia", "12314", 21, "male", 180, 75.0, "moderate", "vegetarian", "lose weight");
+        Instructor instructor1 = new Instructor("aggelos", "1234");
+        clients.add(client1);
+        clients.add(client2);
+        instructors.add(instructor1);
+        //manually add users
+        users.put("dionusia", "1234");
+        users.put("stelios", "1234");
+        users.put("aggelos", "1234");
+        
+        while (true) {
+            System.out.println("Welcome to FIND YOUR BALANCE! Please choose an option:");
+            System.out.println("1. Login");
+            System.out.println("2. Register");
+            System.out.println("3. Exit");
+            System.out.println("4. display users");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            
+            switch (choice) {
+                case 1:
+                    login();
                     break;
-                } else {
-                    System.out.println("Invalid choice.");
-                }
+                case 2:
+                    register();
+                    break;
+                case 3:
+                    System.out.println("Exiting program...");
+                    System.exit(0);
+                    break;
+                case 4:
+                    displayUsers();
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
             }
-        } finally {
-            scanner.close();
         }
     }
-    // Προσαρμοσμένη κλάση για την αποθήκευση των πεδίων
-    public  class Entry {
-        private String password;
-        private int age;
-        private String gender;
-        private String level;
+    
+    private static void login() {
+        System.out.println("Enter your username:");
+        String username = scanner.nextLine();
+        System.out.println("Enter your password:");
+        String password = scanner.nextLine();
+        
+        if (users.containsKey(username) && users.get(username).equals(password)) {
+            System.out.println("Login successful!");
+            Menu menu = new Menu();
+            menu.run();
+        } else {
+            System.out.println("Incorrect username or password. Please try again.");
+        }
+    }
 
-        public Entry(){}
-        public Entry(String password, int age,String  gender ,String level) {
-            this.password = password;
-            this.age = age;
-            this.gender = gender;
-            this.level=level;
+    private static void register() {
+        System.out.println("Enter your username:");
+        String username = scanner.nextLine();
+        
+        if (users.containsKey(username)) {
+            System.out.println("Username already exists. Please try again with a different username.");
+            return;
         }
+        
+        System.out.println("Enter your password:");
+        String password = scanner.nextLine();
+        
+        System.out.println("Choose your role:");
+        System.out.println("1. Client");
+        System.out.println("2. Instructor");
+        int roleChoice = scanner.nextInt();
+        scanner.nextLine(); // consume the newline character
+        
+        switch (roleChoice) {
+            case 1:
+                System.out.println("Enter your age:");
+                int age = scanner.nextInt();
+                scanner.nextLine(); // consume the newline character
+                
+                System.out.println("Enter your gender:");
+                String gender = scanner.nextLine();
+                
+                System.out.println("Enter your height (in cm):");
+                int height = scanner.nextInt();
+                scanner.nextLine(); // consume the newline character
+                
+                System.out.println("Enter your weight (in kg):");
+                double weight = scanner.nextDouble();
+                scanner.nextLine(); // consume the newline character
+                
+                System.out.println("Enter your activity level:");
+                String activityLevel = scanner.nextLine();
+                
+                System.out.println("Enter your dietary preferences:");
+                String dietaryPreferences = scanner.nextLine();
+                
+                System.out.println("Enter your goals:");
+                String goals = scanner.nextLine();
+                
+                Client client = new Client(username, password, age, gender, height, weight, activityLevel, dietaryPreferences, goals);
+                clients.add(client);
+                break;
+            case 2:
+                Instructor instructor = new Instructor(username, password);
+                instructors.add(instructor);
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+                return;
+        }
+        
+        users.put(username, password);
+        System.out.println("Registration successful!");
+    }
 
-        public String getPassword() {
-            return password;
-        }
-
-        public int getAge() {
-            return age;
-        }
-
-        public String getGender() {
-            return gender;
-        }
-        public String getLevel(){
-            return level;
-        }
-        public void setPassword(String password){
-            this.password=password;
-        }
-        public void setAge(int age){
-            this.age=age;
+    private static void displayUsers() {
+        System.out.println("Registered Users:");
+        for (String username : users.keySet()) {
+            System.out.println("Username: " + username + ", Password: " + users.get(username));
+            for (Client client : clients) {
+                if (client.getUsername().equals(username)) {
+                    System.out.println("Client Info:");
+                    System.out.println("Age: " + client.getAge());
+                    System.out.println("Gender: " + client.getGender());
+                    System.out.println("Height: " + client.getHeight() + " cm");
+                    System.out.println("Weight: " + client.getWeight() + " kg");
+                    System.out.println("Activity Level: " + client.getActivityLevel());
+                    System.out.println("Dietary Preferences: " + client.getDietaryPreferences());
+                    System.out.println("Goals: " + client.getGoals());
+                }
+            }
         }
     }
 }
