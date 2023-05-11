@@ -1,6 +1,10 @@
 public class Instructor extends User {
-    public Instructor(String username, String password) {
-        super(username, password);
+
+    private String role;
+    
+    public Instructor(String username, String password, String role) {
+        super(username, password,role);
+        this.role = role;
     }
     
     public void createMealPlan(Client client) {
@@ -13,5 +17,13 @@ public class Instructor extends User {
     
     public void manageClientProfile(Client client) {
         // logic for managing the client's profile
+    }
+    
+    public String getRole() {
+        return role;
+    }
+    
+    public void setRole(String role) {
+        this.role = role;
     }
 }

@@ -10,9 +10,9 @@ public class LoginPage {
     
     public static void main(String[] args) {
         // create some clients and instructors
-        Client client1 = new Client("stelios", "1234", 42, "male", 180, 75.0, "moderate", "vegetarian", "lose weight");
-        Client client2 = new Client("dionusia", "12314", 21, "male", 180, 75.0, "moderate", "vegetarian", "lose weight");
-        Instructor instructor1 = new Instructor("aggelos", "1234");
+        Client client1 = new Client("stelios", "1234", 42, "male", 180, 75.0, "moderate", "vegetarian", "lose weight", "client");
+        Client client2 = new Client("dionusia", "12314", 21, "male", 180, 75.0, "moderate", "vegetarian", "lose weight", "client");
+        Instructor instructor1 = new Instructor("aggelos", "1234", "instructor");
         clients.add(client1);
         clients.add(client2);
         instructors.add(instructor1);
@@ -55,15 +55,30 @@ public class LoginPage {
         String username = scanner.nextLine();
         System.out.println("Enter your password:");
         String password = scanner.nextLine();
-        
+
         if (users.containsKey(username) && users.get(username).equals(password)) {
             System.out.println("Login successful!");
-            Menu menu = new Menu();
-            menu.run();
-        } else {
+
+            // display different menu if user is client or instructor
+            String role = "";
+            for (Client client : clients) {
+                if (client.getUsername().equals(username)) {
+                    Menu menu = new Menu();
+                    menu.run();
+                }
+            }
+            if (role.equals("")) {
+                for (Instructor instructor : instructors) {
+                    if (instructor.getUsername().equals(username)) {
+                        System.out.println("MENU INSTRUCTOR");
+                    }
+                }
+            }
+        }else {
             System.out.println("Incorrect username or password. Please try again.");
         }
     }
+
 
     private static void register() {
         System.out.println("Enter your username:");
@@ -109,11 +124,11 @@ public class LoginPage {
                 System.out.println("Enter your goals:");
                 String goals = scanner.nextLine();
                 
-                Client client = new Client(username, password, age, gender, height, weight, activityLevel, dietaryPreferences, goals);
+                Client client = new Client(username, password, age, gender, height, weight, activityLevel, dietaryPreferences, goals, "client");
                 clients.add(client);
                 break;
             case 2:
-                Instructor instructor = new Instructor(username, password);
+                Instructor instructor = new Instructor(username, password, "instructor");
                 instructors.add(instructor);
                 break;
             default:
@@ -139,6 +154,7 @@ public class LoginPage {
                     System.out.println("Activity Level: " + client.getActivityLevel());
                     System.out.println("Dietary Preferences: " + client.getDietaryPreferences());
                     System.out.println("Goals: " + client.getGoals());
+                    System.out.println("role: " + client.getRole());
                 }
             }
         }

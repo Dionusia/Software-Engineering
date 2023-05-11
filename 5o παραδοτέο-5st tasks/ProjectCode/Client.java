@@ -6,10 +6,11 @@ public class Client extends User {
     private String activityLevel;
     private String dietaryPreferences;
     private String goals;
+    private String role;
     
     public Client(String username, String password, int age, String gender, int height, double weight,
-            String activityLevel, String dietaryPreferences, String goals) {
-        super(username, password);
+            String activityLevel, String dietaryPreferences, String goals, String role) {
+        super(username, password,role);
         this.age = age;
         this.gender = gender;
         this.height = height;
@@ -17,9 +18,10 @@ public class Client extends User {
         this.activityLevel = activityLevel;
         this.dietaryPreferences = dietaryPreferences;
         this.goals = goals;
+        this.role = role;
     }
     
-    // getters and setters for age, gender, height, weight, activityLevel, dietaryPreferences, and goals
+    // getters and setters for age, gender, height, weight, activityLevel, dietaryPreferences, goals, and role
     public int getAge() {
         return age;
     }
@@ -74,5 +76,13 @@ public class Client extends User {
     
     public void setGoals(String goals) {
         this.goals = goals;
+    }
+
+    public String getRole() {
+        return role;
+    }
+    
+    public void setRole(String role) {
+        this.role = role;
     }
 }
