@@ -26,7 +26,6 @@ public class LoginPage {
             System.out.println("1. Login");
             System.out.println("2. Register");
             System.out.println("3. Exit");
-            System.out.println("4. display users");
             int choice = scanner.nextInt();
             scanner.nextLine();
             
@@ -40,9 +39,6 @@ public class LoginPage {
                 case 3:
                     System.out.println("Exiting program...");
                     System.exit(0);
-                    break;
-                case 4:
-                    displayUsers();
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -142,7 +138,7 @@ public class LoginPage {
         System.out.println("Registration successful!");
     }
 
-    private static void displayUsers() {
+    /*private static void displayUsers() {
         System.out.println("Registered Users:");
         for (String username : users.keySet()) {
             System.out.println("Username: " + username + ", Password: " + users.get(username));
@@ -160,5 +156,5 @@ public class LoginPage {
                 }
             }
         }
-    }
+    }*/
 }
