@@ -66,10 +66,10 @@ public class FoodDiary {
                 isValidInput = true;
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a valid integer.");
-                scanner.nextLine(); // clear the input buffer
+                scanner.nextLine(); 
             }
         } while (!isValidInput);
-        scanner.nextLine(); // clear the input buffer
+        scanner.nextLine();
         return choice;
     }
 
@@ -111,7 +111,6 @@ public class FoodDiary {
 
     public void updateMeal() {
         // Display list of meals
-        // Display list of meals
         if (meals.isEmpty()) {
             System.out.println("Your food diary is empty.");
             return;
@@ -127,10 +126,10 @@ public class FoodDiary {
             System.out.println("Enter the number of the meal you want to update:");
             try {
                 mealIndex = scanner.nextInt() - 1;
-                scanner.nextLine(); // consume the extra newline character
+                scanner.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a number.");
-                scanner.nextLine(); // consume the invalid input
+                scanner.nextLine(); 
             }
         }
     
@@ -156,7 +155,7 @@ public class FoodDiary {
         int protein = scanner.nextInt();
         System.out.println("Please enter the vitamins (currently: " + nutritionInfo.getVitamins() + "):");
         int vitamins = scanner.nextInt();
-        scanner.nextLine(); // consume the extra newline character
+        scanner.nextLine(); 
     
         String notes = foodItem.getNotes();
         System.out.println("Please enter the notes (currently: " + notes + "):");
@@ -327,7 +326,7 @@ public class FoodDiary {
                 break;
             case 2:
                 System.out.println("Barcode Implementation");
-                break;
+                return;
             default:
                 System.out.println("Invalid choice");
                 return;
@@ -384,7 +383,7 @@ public class FoodDiary {
         int protein = scanner.nextInt();
         System.out.println("Please enter the vitamins:");
         int vitamins = scanner.nextInt();
-        scanner.nextLine(); // consume the extra newline character
+        scanner.nextLine(); 
     
         System.out.println("Please enter any notes for the custom meal:");
         String notes = scanner.nextLine();
@@ -395,7 +394,7 @@ public class FoodDiary {
         String dietaryRestrictionsString = scanner.nextLine();
         List<String> dietaryRestrictions = Arrays.asList(dietaryRestrictionsString.split("\\s*,\\s*"));
     
-        System.out.println("Please enter the ingredients for the custom meal (one ingredient per line, end with an empty line):");
+        System.out.println("Please enter the ingredients for the custom meal (one ingredient per line, end with empty line):");
         List<String> ingredients = new ArrayList<>();
         String ingredient = "";
         while (true) {
