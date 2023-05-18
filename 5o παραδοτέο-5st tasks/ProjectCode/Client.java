@@ -3,14 +3,14 @@ public class Client extends User {
     private String gender;
     private int height;
     private double weight;
-    private String activityLevel;
     private String dietaryPreferences;
-    private String goals;
+    private ActivityLevel activityLevel;
+    private HealthGoal goals;
     private String role;
-    
+
     public Client(String username, String password, int age, String gender, int height, double weight,
-            String activityLevel, String dietaryPreferences, String goals, String role) {
-        super(username, password,role);
+                  ActivityLevel activityLevel, String dietaryPreferences, HealthGoal goals, String role) {
+        super(username, password, role);
         this.age = age;
         this.gender = gender;
         this.height = height;
@@ -54,11 +54,11 @@ public class Client extends User {
         this.weight = weight;
     }
     
-    public String getActivityLevel() {
+    public ActivityLevel getActivityLevel() {
         return activityLevel;
     }
-    
-    public void setActivityLevel(String activityLevel) {
+
+    public void setActivityLevel(ActivityLevel activityLevel) {
         this.activityLevel = activityLevel;
     }
     
@@ -70,11 +70,11 @@ public class Client extends User {
         this.dietaryPreferences = dietaryPreferences;
     }
     
-    public String getGoals() {
+    public HealthGoal getGoals() {
         return goals;
     }
-    
-    public void setGoals(String goals) {
+
+    public void setGoals(HealthGoal goals) {
         this.goals = goals;
     }
 
