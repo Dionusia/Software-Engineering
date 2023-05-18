@@ -55,6 +55,9 @@ public class Menu {
             case 1:
                 foodDiary();
                 break;
+            case 2:
+                recommendedPrograms();
+                break;
             case 11:
                 logOut();
                 break;
@@ -66,6 +69,11 @@ public class Menu {
     private void foodDiary() {
         FoodDiary foodDiary = new FoodDiary();
         foodDiary.foodDiaryMenu();
+    }
+
+    private void recommendedPrograms(){
+        RecommendedPrograms programs = new RecommendedPrograms();
+        programs.RecommendedProgramsMenu();
     }
 
     private void logOut() {
