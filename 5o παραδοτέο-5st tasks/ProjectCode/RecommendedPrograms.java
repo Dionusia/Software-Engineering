@@ -93,21 +93,15 @@ public class RecommendedPrograms {
     
     private List<String> getAllPrograms() {
         List<String> allPrograms = new ArrayList<>();
-        for (FitnessProgram fitnessProgram : fitnessPrograms) {
-            String programDetails = "Fitness Program: " + fitnessProgram.getName()
-                    + "\nDuration: " + fitnessProgram.getDuration() + " minutes"
-                    + "\nExercises: " + fitnessProgram.getExercises();
-            allPrograms.add(programDetails);
+        for (Object program : fitnessPrograms) {
+            allPrograms.add(getProgramDetails(program));
         }
-        for (DietProgram dietProgram : dietPrograms) {
-            String programDetails = "Diet Program: " + dietProgram.getName()
-                    + "\nDuration: " + dietProgram.getDuration() + " days"
-                    + "\nMeals: " + dietProgram.getMeals();
-            allPrograms.add(programDetails);
+        for (Object program : dietPrograms) {
+            allPrograms.add(getProgramDetails(program));
         }
         return allPrograms;
     }
-
+    
     public void displayPrograms() {
         List<String> allPrograms = getAllPrograms();
         if (allPrograms.isEmpty()) {
@@ -115,31 +109,40 @@ public class RecommendedPrograms {
         } else {
             System.out.println("All Programs:");
             for (int i = 0; i < allPrograms.size(); i++) {
-                String program = allPrograms.get(i);
-                System.out.println((i + 1) + ". " + program);
+                String programDetails = allPrograms.get(i);
+                System.out.println((i + 1) + ". " + programDetails);
             }
-            
+    
             System.out.print("Enter the program numbers you want to save (separated by commas): ");
             String input = scanner.nextLine().trim();
-            
+    
             String[] programNumbers = input.split(",");
-            List<String> selectedPrograms = new ArrayList<>();
+            List<Object> selectedPrograms = new ArrayList<>();
             for (String number : programNumbers) {
                 int index = Integer.parseInt(number.trim()) - 1;
                 if (index >= 0 && index < allPrograms.size()) {
-                    selectedPrograms.add(allPrograms.get(index));
+                    selectedPrograms.add(getProgramObject(index));
                 }
             }
-            
+    
             if (!selectedPrograms.isEmpty()) {
                 savePrograms(selectedPrograms);
                 System.out.println("Programs saved successfully!");
             }
         }
     }
+    
+    private Object getProgramObject(int index) {
+        int fitnessProgramsSize = fitnessPrograms.size();
+        if (index < fitnessProgramsSize) {
+            return fitnessPrograms.get(index);
+        } else {
+            return dietPrograms.get(index - fitnessProgramsSize);
+        }
+    }
 
-    public void savePrograms(List<String> programs) {
-        savedPrograms = new ArrayList<>(programs);
+    public void savePrograms(List<Object> selectedPrograms) {
+        savedPrograms = new ArrayList<>(selectedPrograms);
     }
 
     public void displaySavedPrograms() {
@@ -147,22 +150,31 @@ public class RecommendedPrograms {
             System.out.println("No saved programs.");
         } else {
             System.out.println("Saved Programs:");
-            for (Object program : savedPrograms) {
-                System.out.println(program);
+            for (int i = 0; i < savedPrograms.size(); i++) {
+                Object program = savedPrograms.get(i);
+                String programDetails = getProgramDetails(program);
+                System.out.println((i + 1) + ". " + programDetails);
             }
         }
     }
+    
+    private String getProgramDetails(Object program) {
+        if (program instanceof FitnessProgram) {
+            FitnessProgram fitnessProgram = (FitnessProgram) program;
+            return "Fitness Program: " + fitnessProgram.getName()
+                    + "\nDuration: " + fitnessProgram.getDuration() + " minutes"
+                    + "\nExercises: " + fitnessProgram.getExercises();
+        } else if (program instanceof DietProgram) {
+            DietProgram dietProgram = (DietProgram) program;
+            return "Diet Program: " + dietProgram.getName()
+                    + "\nDuration: " + dietProgram.getDuration() + " days"
+                    + "\nMeals: " + dietProgram.getMeals();
+        }
+        return "";
+    }
 
     public void modifySavedPrograms() {
-        if (savedPrograms == null || savedPrograms.isEmpty()) {
-            System.out.println("No saved programs.");
-            return;
-        }
-    
-        System.out.println("Saved Programs:");
-        for (int i = 0; i < savedPrograms.size(); i++) {
-            System.out.println((i + 1) + ". " + savedPrograms.get(i));
-        }
+        displaySavedPrograms();
     
         System.out.print("Enter the program number you want to modify: ");
         int programNumber = readChoice();
@@ -222,8 +234,10 @@ public class RecommendedPrograms {
                     dietProgram.addMeal(meal.trim());
                 }
             }
+        } else {
+            System.out.println("Invalid program type.");
         }
-    
+
         System.out.println("Program modified successfully!");
     }
     
