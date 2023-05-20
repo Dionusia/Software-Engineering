@@ -30,8 +30,9 @@ public class Recipes {
             System.out.println("3. Modify a recipe");
             System.out.println("4. Share a recipe");
             System.out.println("5. Create a new recipe");
-            System.out.println("6. Rate and review a recipe");
-            System.out.println("7. Back to main menu");
+            System.out.println("6. Search recipes by ingredient");
+            System.out.println("7. Rate and review a recipe");
+            System.out.println("8. Back to main menu");
             System.out.println("---------------------------------------");
             int choice = readChoice();
             switch (choice) {
@@ -45,15 +46,18 @@ public class Recipes {
                     modifyRecipe(personalRecipeCollection);
                     break;
                 case 4:
-                    // Implement share a recipe
+                    shareRecipe(personalRecipeCollection);
                     break;
                 case 5:
                     createNewRecipe();
                     break;
                 case 6:
-                    // Implement search recipe by ingredient
+                    searchRecipesByIngredient();
                     break;
                 case 7:
+                    //rate
+                    break;
+                case 8:
                     isRunning = false;
                     break;
                 default:
@@ -194,6 +198,67 @@ public class Recipes {
         System.out.println("Recipe created successfully!");
     }
 
+    public void shareRecipe(PersonalRecipeCollection personalRecipeCollection) {
+        List<Recipes> savedRecipes = personalRecipeCollection.getRecipes();
+    
+        if (savedRecipes.isEmpty()) {
+            System.out.println("No saved recipes found.");
+            return;
+        }
+    
+        System.out.println("Select a recipe to share:");
+        for (int i = 0; i < savedRecipes.size(); i++) {
+            System.out.println((i + 1) + ". " + savedRecipes.get(i).getName());
+        }
+    
+        int recipeChoice = readChoice();
+    
+        Recipes selectedRecipe = savedRecipes.get(recipeChoice - 1);
+    
+        SocialMedia socialMedia = new SocialMedia();
+        String selectedOption = socialMedia.selectShareOption();
+    
+        System.out.println("Successfully shared recipe '" + selectedRecipe.getName() + "' on " + selectedOption);
+    }
+    
+    private void searchRecipesByIngredient() {
+        System.out.print("Enter the name of the ingredient to search for: ");
+        String ingredientName = scanner.nextLine();
+        
+        List<Recipes> matchingRecipes = new ArrayList<>();
+
+        for (Recipes recipe : recommendedRecipes) {
+            for (Ingredient ingredient : recipe.getIngredients()) {
+                if (ingredient.getName().equalsIgnoreCase(ingredientName)) {
+                    matchingRecipes.add(recipe);
+                    break;
+                }
+            }
+        }
+
+        if (matchingRecipes.isEmpty()) {
+            System.out.println("No recipes found that include the ingredient: " + ingredientName);
+        } else {
+            System.out.println("Recipes including the ingredient: " + ingredientName);
+            for (int i = 0; i < matchingRecipes.size(); i++) {
+                Recipes recipe = matchingRecipes.get(i);
+                System.out.println((i + 1) + ". " + recipe.getName());
+                System.out.println("Cooking Time: " + recipe.getCookingTime() + " minutes");
+                System.out.println("Serving Size: " + recipe.getServingSize());
+                System.out.println("Dietary Preferences: " + recipe.getDietaryPreference());
+                System.out.println("Ingredients:");
+                for (Ingredient ingredient : recipe.getIngredients()) {
+                    System.out.println("- " + ingredient.getName() + ": " + ingredient.getQuantity() + " " + ingredient.getUnitOfMeasurement());
+                }
+                System.out.println("Instructions:");
+                for (String instruction : recipe.getInstructions()) {
+                    System.out.println("- " + instruction);
+                }
+                System.out.println("---------------------------------------");
+            }
+        }
+    }
+
     // Getters-setters
     public String getName() {
         return name;
@@ -243,14 +308,11 @@ public class Recipes {
         this.dietaryPreference = dietaryPreference;
     }
 
-    public void shareRecipe(String medium) {
-        // Code for sharing the recipe through the specified medium (e.g., social media or email)
-    }
-
     //add data manually
     public void addSampleData() {
         DietaryPreference preference1 = new DietaryPreference("Vegetarian");
         DietaryPreference preference2 = new DietaryPreference("Vegan");
+        DietaryPreference preference3 = new DietaryPreference("Οmnivorous");
     
         Recipes recipe1 = new Recipes();
         recipe1.setName("Spaghetti Bolognese");
@@ -283,8 +345,32 @@ public class Recipes {
         recipe2.getInstructions().add("Add the bell pepper and broccoli and cook for 3-4 minutes.");
         recipe2.getInstructions().add("Stir in the soy sauce and cook for another 2 minutes.");
         recipe2.setDietaryPreference(preference2);
+
+        Recipes recipe3 = new Recipes();
+        recipe3.setName("Roasted Vegetable Quinoa Salad");
+        recipe3.setCookingTime(40);
+        recipe3.setServingSize(6);
+        recipe3.setIngredients(new ArrayList<>());
+        recipe3.getIngredients().add(new Ingredient("Quinoa", 1, "cup"));
+        recipe3.getIngredients().add(new Ingredient("Bell Pepper", 2, "pieces"));
+        recipe3.getIngredients().add(new Ingredient("Zucchini", 1, "medium"));
+        recipe3.getIngredients().add(new Ingredient("Cherry Tomatoes", 1, "cup"));
+        recipe3.getIngredients().add(new Ingredient("Red Onion", 1, "small"));
+        recipe3.getIngredients().add(new Ingredient("Olive Oil", 2, "tablespoons"));
+        recipe3.getIngredients().add(new Ingredient("Lemon Juice", 2, "tablespoons"));
+        recipe3.getIngredients().add(new Ingredient("Onion", 2, "medium"));
+        recipe3.setInstructions(new ArrayList<>());
+        recipe3.getInstructions().add("Cook quinoa according to package instructions.");
+        recipe3.getInstructions().add("Preheat the oven to 400°F (200°C).");
+        recipe3.getInstructions().add("Cut the bell pepper, zucchini, and red onion into bite-sized pieces.");
+        recipe3.getInstructions().add("Toss the vegetables with olive oil, salt, and pepper.");
+        recipe3.getInstructions().add("Spread the vegetables on a baking sheet and roast for 20-25 minutes.");
+        recipe3.getInstructions().add("In a large bowl, combine cooked quinoa, roasted vegetables, cherry tomatoes, and lemon juice.");
+        recipe3.getInstructions().add("Season with salt and pepper to taste.");
+        recipe3.setDietaryPreference(preference3);
     
         recommendedRecipes.add(recipe1);
         recommendedRecipes.add(recipe2);
+        recommendedRecipes.add(recipe3);
     }  
 }
