@@ -1,4 +1,4 @@
-public class FoodItem {
+public class FoodItem extends FoodDiary {
     private String name;
     private NutritionInfo nutritionInfo;
     private String notes;

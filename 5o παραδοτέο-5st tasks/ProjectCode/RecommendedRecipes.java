@@ -2,17 +2,23 @@ public class RecommendedRecipes extends Recipes {
     private String dietaryPreferences;
     private String goals;
 
-    /*public RecommendedRecipes(String name, int cookingTime, int servingSize, List<Ingredient> ingredients, List<String> instructions, String dietaryPreferences, String goals) {
-        super(name, cookingTime, servingSize, ingredients, instructions);
-        this.dietaryPreferences = dietaryPreferences;
-        this.goals = goals;
-    }*/
+    public RecommendedRecipes() {
+        super();
+    }
 
     public String getDietaryPreferences() {
         return dietaryPreferences;
     }
 
+    public void setDietaryPreferences(String dietaryPreferences) {
+        this.dietaryPreferences = dietaryPreferences;
+    }
+
     public String getGoals() {
         return goals;
+    }
+
+    public void setGoals(String goals) {
+        this.goals = goals;
     }
 }

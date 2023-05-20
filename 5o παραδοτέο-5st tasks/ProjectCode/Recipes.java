@@ -12,10 +12,12 @@ public class Recipes {
     private PersonalRecipeCollection personalRecipeCollection;
     private List<Ingredient> ingredients;
     private List<String> instructions;
+    private DietaryPreference dietaryPreference;
 
     public Recipes() {
         this.recommendedRecipes = new ArrayList<>();
         this.personalRecipeCollection = new PersonalRecipeCollection();
+        this.dietaryPreference = null;
         this.scanner = new Scanner(System.in);
     }
 
@@ -84,6 +86,7 @@ public class Recipes {
             System.out.println((i + 1) + ". " + recipe.getName());
             System.out.println("Cooking Time: " + recipe.getCookingTime() + " minutes");
             System.out.println("Serving Size: " + recipe.getServingSize());
+            System.out.println("Dietary Preferences: " + recipe.getDietaryPreference());
             System.out.println("Ingredients:");
             for (Ingredient ingredient : recipe.getIngredients()) {
                 System.out.println("- " + ingredient.getName() + ": " + ingredient.getQuantity() + " " + ingredient.getUnitOfMeasurement());
@@ -232,43 +235,56 @@ public class Recipes {
         this.instructions = instructions;
     }
 
+    public DietaryPreference getDietaryPreference() {
+        return dietaryPreference;
+    }
+
+    public void setDietaryPreference(DietaryPreference dietaryPreference) {
+        this.dietaryPreference = dietaryPreference;
+    }
+
     public void shareRecipe(String medium) {
         // Code for sharing the recipe through the specified medium (e.g., social media or email)
     }
 
     //add data manually
     public void addSampleData() {
+        DietaryPreference preference1 = new DietaryPreference("Vegetarian");
+        DietaryPreference preference2 = new DietaryPreference("Vegan");
+    
         Recipes recipe1 = new Recipes();
-        recipe1.name = "Spaghetti Bolognese";
-        recipe1.cookingTime = 30;
-        recipe1.servingSize = 4;
-        recipe1.ingredients = new ArrayList<>();
-        recipe1.ingredients.add(new Ingredient("Spaghetti", 200, "grams"));
-        recipe1.ingredients.add(new Ingredient("Ground Beef", 500, "grams"));
-        recipe1.ingredients.add(new Ingredient("Tomato Sauce", 400, "grams"));
-        recipe1.ingredients.add(new Ingredient("Onion", 1, "medium"));
-        recipe1.instructions = new ArrayList<>();
-        recipe1.instructions.add("Cook spaghetti according to package instructions.");
-        recipe1.instructions.add("In a large pan, brown the ground beef and onion.");
-        recipe1.instructions.add("Add tomato sauce and simmer for 10 minutes.");
-        recipe1.instructions.add("Serve the sauce over cooked spaghetti.");
-
+        recipe1.setName("Spaghetti Bolognese");
+        recipe1.setCookingTime(30);
+        recipe1.setServingSize(4);
+        recipe1.setIngredients(new ArrayList<>());
+        recipe1.getIngredients().add(new Ingredient("Spaghetti", 200, "grams"));
+        recipe1.getIngredients().add(new Ingredient("Ground Beef", 500, "grams"));
+        recipe1.getIngredients().add(new Ingredient("Tomato Sauce", 400, "grams"));
+        recipe1.getIngredients().add(new Ingredient("Onion", 1, "medium"));
+        recipe1.setInstructions(new ArrayList<>());
+        recipe1.getInstructions().add("Cook spaghetti according to package instructions.");
+        recipe1.getInstructions().add("In a large pan, brown the ground beef and onion.");
+        recipe1.getInstructions().add("Add tomato sauce and simmer for 10 minutes.");
+        recipe1.getInstructions().add("Serve the sauce over cooked spaghetti.");
+        recipe1.setDietaryPreference(preference1);
+    
         Recipes recipe2 = new Recipes();
-        recipe2.name = "Chicken Stir-Fry";
-        recipe2.cookingTime = 25;
-        recipe2.servingSize = 3;
-        recipe2.ingredients = new ArrayList<>();
-        recipe2.ingredients.add(new Ingredient("Chicken Breast", 400, "grams"));
-        recipe2.ingredients.add(new Ingredient("Bell Pepper", 2, "pieces"));
-        recipe2.ingredients.add(new Ingredient("Broccoli", 1, "head"));
-        recipe2.ingredients.add(new Ingredient("Soy Sauce", 2, "tablespoons"));
-        recipe2.instructions = new ArrayList<>();
-        recipe2.instructions.add("Cut the chicken, bell pepper, and broccoli into bite-sized pieces.");
-        recipe2.instructions.add("Stir-fry the chicken in a pan until cooked.");
-        recipe2.instructions.add("Add the bell pepper and broccoli and cook for 3-4 minutes.");
-        recipe2.instructions.add("Stir in the soy sauce and cook for another 2 minutes.");
-
+        recipe2.setName("Chicken Stir-Fry");
+        recipe2.setCookingTime(25);
+        recipe2.setServingSize(3);
+        recipe2.setIngredients(new ArrayList<>());
+        recipe2.getIngredients().add(new Ingredient("Chicken Breast", 400, "grams"));
+        recipe2.getIngredients().add(new Ingredient("Bell Pepper", 2, "pieces"));
+        recipe2.getIngredients().add(new Ingredient("Broccoli", 1, "head"));
+        recipe2.getIngredients().add(new Ingredient("Soy Sauce", 2, "tablespoons"));
+        recipe2.setInstructions(new ArrayList<>());
+        recipe2.getInstructions().add("Cut the chicken, bell pepper, and broccoli into bite-sized pieces.");
+        recipe2.getInstructions().add("Stir-fry the chicken in a pan until cooked.");
+        recipe2.getInstructions().add("Add the bell pepper and broccoli and cook for 3-4 minutes.");
+        recipe2.getInstructions().add("Stir in the soy sauce and cook for another 2 minutes.");
+        recipe2.setDietaryPreference(preference2);
+    
         recommendedRecipes.add(recipe1);
         recommendedRecipes.add(recipe2);
-    }
+    }  
 }

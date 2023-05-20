@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class DietProgram {
+public class DietProgram extends RecommendedPrograms {
     private String name;
     private int duration;
     private List<String> meals;

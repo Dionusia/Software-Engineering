@@ -19,6 +19,7 @@ public class PersonalRecipeCollection {
             System.out.println((i + 1) + ". " + recipe.getName());
             System.out.println("Cooking Time: " + recipe.getCookingTime() + " minutes");
             System.out.println("Serving Size: " + recipe.getServingSize());
+            System.out.println("Dietary Preferences: " + recipe.getDietaryPreference());
             System.out.println("Ingredients:");
             for (Ingredient ingredient : recipe.getIngredients()) {
                 System.out.println("- " + ingredient.getName() + ": " + ingredient.getQuantity() + " " + ingredient.getUnitOfMeasurement());
@@ -30,6 +31,7 @@ public class PersonalRecipeCollection {
             System.out.println("---------------------------------------");
         }
     }
+
     public List<Recipes> getRecipes() {
         return savedRecipes;
     }

@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class FitnessProgram {
+public class FitnessProgram extends RecommendedPrograms {
     private String name;
     private int duration;
     private List<String> exercises;
