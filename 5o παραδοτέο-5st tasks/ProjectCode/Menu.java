@@ -58,6 +58,9 @@ public class Menu {
             case 2:
                 recommendedPrograms();
                 break;
+            case 3:
+                recipes();
+                break;
             case 11:
                 logOut();
                 break;
@@ -74,6 +77,12 @@ public class Menu {
     private void recommendedPrograms(){
         RecommendedPrograms programs = new RecommendedPrograms();
         programs.RecommendedProgramsMenu();
+    }
+
+    private void recipes(){
+        Recipes recipes = new Recipes();
+        recipes.addSampleData();
+        recipes.recipesMenu();
     }
 
     private void logOut() {
