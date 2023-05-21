@@ -12,11 +12,14 @@ public class LoginPage {
     public static void main(String[] args) {
         // create some clients and instructors
         Client client1 = new Client("stelios", "1234", 42, "male", 180, 75.0, ActivityLevel.MODERATELY_ACTIVE, "vegetarian", HealthGoal.LOSE_WEIGHT, "client");
-Client client2 = new Client("dionusia", "12314", 21, "male", 180, 75.0, ActivityLevel.MODERATELY_ACTIVE, "vegetarian", HealthGoal.LOSE_WEIGHT, "client");
+        Client client2 = new Client("dionusia", "12314", 21, "male", 180, 75.0, ActivityLevel.MODERATELY_ACTIVE, "vegetarian", HealthGoal.LOSE_WEIGHT, "client");
         Instructor instructor1 = new Instructor("aggelos", "1234", "instructor");
+        Instructor instructor2 = new Instructor("nadia", "1234", "instructor");
         clients.add(client1);
         clients.add(client2);
         instructors.add(instructor1);
+        instructors.add(instructor2);
+        ReviewInstructor.setRegisteredInstructors(List.of(instructor1, instructor2));
         // manually add users
         users.put("dionusia", "1234");
         users.put("stelios", "1234");

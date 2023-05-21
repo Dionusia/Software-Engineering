@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MenuInstructor {
@@ -24,7 +26,8 @@ public class MenuInstructor {
         System.out.println("1. Create Meal Plan");
         System.out.println("2. Create Fitness Plan");
         System.out.println("3. Manage Client Profile");
-        System.out.println("4. Log Out");
+        System.out.println("4. See your feedback");
+        System.out.println("5. Log Out");
         System.out.println("-------------------------------------");
     }
 
@@ -46,11 +49,46 @@ public class MenuInstructor {
     private void executeChoice(int choice) {
         switch (choice) {
             case 4:
+                feedback();
+                break;
+            case 5:
                 logOut();
                 break;
             default:
                 System.out.println("Invalid choice.");
         }
+    }
+
+    private void feedback() {
+        Feedback feedback = new Feedback(); 
+        List<Instructor> registeredInstructors = new ArrayList<>(); 
+    
+        Instructor loggedInInstructor = getCurrentLoggedInInstructor();
+    
+        if (loggedInInstructor != null && registeredInstructors.contains(loggedInInstructor)) {
+            // Get the reviews for the current instructor
+            List<ReviewInstructor> instructorReviews = feedback.getReviewsByInstructor(loggedInInstructor);
+            
+            System.out.println("Instructor: " + loggedInInstructor.getUsername());
+            
+            // Display the reviews and ratings
+            for (ReviewInstructor review : instructorReviews) {
+                System.out.println("Rating: " + review.getRating());
+                System.out.println("Review: " + review.getReviewText());
+                System.out.println("User: " + review.getUser().getUsername());
+                System.out.println("---------------------");
+            }
+            
+            System.out.println();
+        } else {
+            System.out.println("No reviews found for the logged-in instructor.");
+        }
+    }
+
+    private Instructor getCurrentLoggedInInstructor() {
+        Instructor loggedInInstructor = null;
+    
+        return loggedInInstructor;
     }
 
     private void logOut() {

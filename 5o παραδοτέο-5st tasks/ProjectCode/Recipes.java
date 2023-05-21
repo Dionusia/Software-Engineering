@@ -12,12 +12,14 @@ public class Recipes {
     private PersonalRecipeCollection personalRecipeCollection;
     private List<Ingredient> ingredients;
     private List<String> instructions;
+    private List<Review> reviews;
     private DietaryPreference dietaryPreference;
 
     public Recipes() {
         this.recommendedRecipes = new ArrayList<>();
         this.personalRecipeCollection = new PersonalRecipeCollection();
         this.dietaryPreference = null;
+        this.reviews = new ArrayList<>();
         this.scanner = new Scanner(System.in);
     }
 
@@ -37,7 +39,7 @@ public class Recipes {
             int choice = readChoice();
             switch (choice) {
                 case 1:
-                    displayRecommendedRecipes();
+                    displayRecommendedRecipes(recommendedRecipes);
                     break;
                 case 2:
                     personalRecipeCollection.displaySavedRecipes();
@@ -83,10 +85,10 @@ public class Recipes {
         return choice;
     }
 
-    private void displayRecommendedRecipes() {
+    public void displayRecommendedRecipes(List<Recipes> recipes) {
         System.out.println("Recommended Recipes:");
-        for (int i = 0; i < recommendedRecipes.size(); i++) {
-            Recipes recipe = recommendedRecipes.get(i);
+        for (int i = 0; i < recipes.size(); i++) {
+            Recipes recipe = recipes.get(i);
             System.out.println((i + 1) + ". " + recipe.getName());
             System.out.println("Cooking Time: " + recipe.getCookingTime() + " minutes");
             System.out.println("Serving Size: " + recipe.getServingSize());
@@ -259,7 +261,11 @@ public class Recipes {
         }
     }
 
+    public void addReview(Review review) {
+        reviews.add(review);
+    }
     // Getters-setters
+
     public String getName() {
         return name;
     }
@@ -372,5 +378,5 @@ public class Recipes {
         recommendedRecipes.add(recipe1);
         recommendedRecipes.add(recipe2);
         recommendedRecipes.add(recipe3);
-    }  
+    } 
 }

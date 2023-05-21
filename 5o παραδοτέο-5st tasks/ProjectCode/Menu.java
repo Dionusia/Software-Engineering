@@ -61,6 +61,9 @@ public class Menu {
             case 3:
                 recipes();
                 break;
+            case 6:
+                reviews();
+                break;
             case 11:
                 logOut();
                 break;
@@ -85,6 +88,12 @@ public class Menu {
         recipes.recipesMenu();
     }
 
+
+    private void reviews() {
+        Review review = new Review();
+        review.reviews();
+    }
+    
     private void logOut() {
         System.out.println("Logging out...");
         LoginPage.main(null);
