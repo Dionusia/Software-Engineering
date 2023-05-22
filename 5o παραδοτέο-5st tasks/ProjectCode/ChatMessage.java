@@ -17,7 +17,7 @@ public class ChatMessage {
     public void MessageMenu() {
         boolean isRunning = true;
         while (isRunning) {
-            System.out.println("--------------- FOOD DIARY ---------------");
+            System.out.println("--------------- CHAT MESSAGE ---------------");
             System.out.println("1. Chat with users");
             System.out.println("2. Search user");
             System.out.println("3. Create group chat");
