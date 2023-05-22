@@ -61,6 +61,9 @@ public class Menu {
             case 3:
                 recipes();
                 break;
+            case 4:
+                chat();
+                break;
             case 6:
                 reviews();
                 break;
@@ -88,6 +91,10 @@ public class Menu {
         recipes.recipesMenu();
     }
 
+    private void chat() {
+        ChatMessage chatMessage = new ChatMessage();
+        chatMessage.MessageMenu();
+    }
 
     private void reviews() {
         Review review = new Review();

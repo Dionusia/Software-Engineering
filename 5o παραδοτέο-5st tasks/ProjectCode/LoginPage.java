@@ -181,6 +181,10 @@ public class LoginPage {
         }
     }   
 
+    public static HashMap<String, String> getRegisteredUsers() {
+        return users;
+    }
+
 }
     /*private static void displayUsers() {
         System.out.println("Registered Users:");
