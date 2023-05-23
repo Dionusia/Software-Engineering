@@ -1,13 +1,16 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
 
     private boolean isRunning;
     private Scanner scanner;
+    private ArrayList<Client> clients;
 
-    public Menu() {
+    public Menu(ArrayList<Client> clients) {
         this.isRunning = true;
         this.scanner = new Scanner(System.in);
+        this.clients = clients;
     }
 
     public void run() {
@@ -67,6 +70,9 @@ public class Menu {
             case 6:
                 reviews();
                 break;
+            case 7:
+                waterTracker(clients);
+                break;
             case 11:
                 logOut();
                 break;
@@ -96,9 +102,26 @@ public class Menu {
         chatMessage.MessageMenu();
     }
 
+    
     private void reviews() {
         Review review = new Review();
         review.reviews();
+    }
+
+    private void waterTracker(ArrayList<Client> clients) {
+        System.out.print("Enter your username: ");
+        String username = scanner.nextLine();
+
+        for (Client client : clients) {
+            if (client.getUsername().equals(username)) {
+                WaterTracker waterTracker = new WaterTracker(2000, client);
+                waterTracker.setLoggedInClient(client);
+                waterTracker.WaterMenu();
+                return;
+            }
+        }
+
+        System.out.println("User not found.");
     }
     
     private void logOut() {

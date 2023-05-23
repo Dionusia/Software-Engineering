@@ -12,7 +12,7 @@ public class LoginPage {
     public static void main(String[] args) {
         // create some clients and instructors
         Client client1 = new Client("stelios", "1234", 42, "male", 180, 75.0, ActivityLevel.MODERATELY_ACTIVE, "vegetarian", HealthGoal.LOSE_WEIGHT, "client");
-        Client client2 = new Client("dionusia", "12314", 21, "male", 180, 75.0, ActivityLevel.MODERATELY_ACTIVE, "vegetarian", HealthGoal.LOSE_WEIGHT, "client");
+        Client client2 = new Client("dionusia", "12314", 21, "male", 180, 60.0, ActivityLevel.MODERATELY_ACTIVE, "vegetarian", HealthGoal.LOSE_WEIGHT, "client");
         Instructor instructor1 = new Instructor("aggelos", "1234", "instructor");
         Instructor instructor2 = new Instructor("nadia", "1234", "instructor");
         clients.add(client1);
@@ -62,7 +62,7 @@ public class LoginPage {
             // display different menu if user is client or instructor
             for (Client client : clients) {
                 if (client.getUsername().equals(username)) {
-                    Menu menu = new Menu();
+                    Menu menu = new Menu(clients);
                     menu.run();
                     return;
                 }
@@ -186,22 +186,3 @@ public class LoginPage {
     }
 
 }
-    /*private static void displayUsers() {
-        System.out.println("Registered Users:");
-        for (String username : users.keySet()) {
-            System.out.println("Username: " + username + ", Password: " + users.get(username));
-            for (Client client : clients) {
-                if (client.getUsername().equals(username)) {
-                    System.out.println("Client Info:");
-                    System.out.println("Age: " + client.getAge());
-                    System.out.println("Gender: " + client.getGender());
-                    System.out.println("Height: " + client.getHeight() + " cm");
-                    System.out.println("Weight: " + client.getWeight() + " kg");
-                    System.out.println("Activity Level: " + client.getActivityLevel());
-                    System.out.println("Dietary Preferences: " + client.getDietaryPreferences());
-                    System.out.println("Goals: " + client.getGoals());
-                    System.out.println("role: " + client.getRole());
-                }
-            }
-        }
-    }*/
