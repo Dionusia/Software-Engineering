@@ -20,14 +20,6 @@ public class Client extends User {
         this.goals = goals;
         this.role = role;
     }
-
-    //this 2 methods its for the progress tracker
-    public void incrementProgress(Challenges challenge) {
-        challenge.getChallengeInfo();
-    }
-    public void decrementProgress(Challenges challenge) {
-        challenge.getChallengeInfo();
-    }
     
     // getters and setters for age, gender, height, weight, activityLevel, dietaryPreferences, goals, and role
     public int getAge() {

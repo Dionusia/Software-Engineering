@@ -9,9 +9,11 @@ public class Challenges {
     private int duration;
     private String requirements;
     private Scanner scanner;
+    private ProgressTracker progressTracker;
 
     public Challenges() {
         this.scanner = new Scanner(System.in);
+        this.progressTracker = new ProgressTracker();
     }
 
     public void challengesMenu(List<Challenges> challengeList) {
@@ -77,7 +79,7 @@ public class Challenges {
         if (acceptedTerms) {
             System.out.println("You have accepted the terms and conditions of the challenge.");
             System.out.println("Starting the challenge...");
-            // Add code to start the challenge here
+            progressTracker.completeChallenge(selectedChallenge);
         } else {
             System.out.println("You have declined the terms and conditions of the challenge.");
             System.out.println("Returning to main menu.");

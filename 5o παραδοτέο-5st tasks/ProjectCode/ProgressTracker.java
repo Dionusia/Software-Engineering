@@ -15,9 +15,7 @@ public class ProgressTracker {
         challenges.add(challenge);
     }
 
-    public void completeChallenge(Client client, Challenges challenge) {
-        //tracking progress and completed challenges
-        client.incrementProgress(challenge);
+    public void completeChallenge(Challenges challenge) {
         completedChallenges.add(challenge.getChallengeInfo());
 
         // Provide feedback and encouragement
@@ -27,12 +25,11 @@ public class ProgressTracker {
         System.out.println("You have earned 20 points, for completing the challenges.");
     }
 
-    public void quitChallenge(Client client, Challenges challenge) {
+    public void quitChallenge(Challenges challenge) {
         // Prompt client for confirmation
         System.out.println("Are you sure you want to quit the challenge?");
 
         // If client confirms, end the challenge, remove challenge progress and mark it as incomplete
-        client.decrementProgress(challenge);
         completedChallenges.remove(challenge.getChallengeInfo());
 
         // Provide a short survey to understand the reason for quitting
