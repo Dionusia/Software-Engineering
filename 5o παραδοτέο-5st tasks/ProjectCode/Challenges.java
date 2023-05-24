@@ -28,7 +28,7 @@ public class Challenges {
                     displayChallenges(challengeList);
                     break;
                 case 2:
-                    //
+                    searchChallenge(challengeList);
                     break;
                 case 3:
                     isRunning = false;
@@ -63,16 +63,16 @@ public class Challenges {
             System.out.println((i + 1) + ". " + challenge.getChallengeInfo());
         }
         System.out.println("-------------------------------------------");
-    
+
         int selectedChallengeIndex = readSelectedChallengeIndex(challengeList);
         if (selectedChallengeIndex == -1) {
             System.out.println("Challenge selection canceled. Returning to main menu.");
             return;
         }
-    
+
         Challenges selectedChallenge = challengeList.get(selectedChallengeIndex);
         System.out.println(selectedChallenge.getChallengeInfo());
-    
+
         boolean acceptedTerms = acceptChallengeTerms();
         if (acceptedTerms) {
             System.out.println("You have accepted the terms and conditions of the challenge.");
@@ -83,7 +83,7 @@ public class Challenges {
             System.out.println("Returning to main menu.");
         }
     }
-    
+
     private int readSelectedChallengeIndex(List<Challenges> challengeList) {
         int selectedChallengeIndex = -1;
         boolean isValidInput = false;
@@ -104,7 +104,7 @@ public class Challenges {
         scanner.nextLine();
         return selectedChallengeIndex - 1;
     }
-    
+
     private boolean acceptChallengeTerms() {
         String choice;
         do {
@@ -114,7 +114,27 @@ public class Challenges {
         return choice.equals("Y");
     }
 
-    //setters-getters
+    private void searchChallenge(List<Challenges> challengeList) {
+        System.out.println("--------------- SEARCH CHALLENGE ---------------");
+        System.out.print("Enter the keyword to search: ");
+        String keyword = scanner.nextLine().trim().toLowerCase();
+
+        boolean found = false;
+        for (Challenges challenge : challengeList) {
+            if (challenge.getChallengeInfo().toLowerCase().contains(keyword)) {
+                System.out.println(challenge.getChallengeInfo());
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No matching challenges found.");
+        }
+
+        System.out.println("-------------------------------------------");
+    }
+
+    // setters-getters
     public String getChallengeInfo() {
         return "Challenge: " + name + "\nDescription: " + description + "\nRules: " + rules + "\nDuration: " + duration + " days\nRequirements: " + requirements;
     }
@@ -148,7 +168,7 @@ public class Challenges {
                 30,
                 "Keep a food journal and track your daily meals."
         );
-    
+
         FitnessChallenge fitnessChallenge = new FitnessChallenge(
                 "30-Day Fitness Challenge",
                 "Get fit and improve your overall physical fitness in just 30 days.",
@@ -156,7 +176,7 @@ public class Challenges {
                 30,
                 "Create a workout plan and track your progress."
         );
-    
+
         challengeList.add(nutritionChallenge);
         challengeList.add(fitnessChallenge);
     }

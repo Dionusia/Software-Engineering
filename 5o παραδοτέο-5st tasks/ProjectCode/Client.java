@@ -7,7 +7,7 @@ public class Client extends User {
     private ActivityLevel activityLevel;
     private HealthGoal goals;
     private String role;
-
+    
     public Client(String username, String password, int age, String gender, int height, double weight,
                   ActivityLevel activityLevel, String dietaryPreferences, HealthGoal goals, String role) {
         super(username, password, role);
@@ -19,6 +19,14 @@ public class Client extends User {
         this.dietaryPreferences = dietaryPreferences;
         this.goals = goals;
         this.role = role;
+    }
+
+    //this 2 methods its for the progress tracker
+    public void incrementProgress(Challenges challenge) {
+        challenge.getChallengeInfo();
+    }
+    public void decrementProgress(Challenges challenge) {
+        challenge.getChallengeInfo();
     }
     
     // getters and setters for age, gender, height, weight, activityLevel, dietaryPreferences, goals, and role
