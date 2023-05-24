@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -67,6 +68,9 @@ public class Menu {
             case 4:
                 chat();
                 break;
+            case 5:
+                challenges();
+                break;
             case 6:
                 reviews();
                 break;
@@ -106,6 +110,13 @@ public class Menu {
     private void reviews() {
         Review review = new Review();
         review.reviews();
+    }
+
+    private void challenges() {
+        Challenges challenges = new Challenges();
+        List<Challenges> challengeList = new ArrayList<>();
+        challenges.addSampleData(challengeList);
+        challenges.challengesMenu(challengeList);
     }
 
     private void waterTracker(ArrayList<Client> clients) {
