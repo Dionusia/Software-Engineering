@@ -38,8 +38,11 @@ public class Review {
     }
 
     private void reviewInstructor() {
-        ReviewInstructor displayInstructors = new ReviewInstructor(null, 0, "", null);
-        displayInstructors.reviewInstructor();
+        if (this instanceof ReviewInstructor) {
+            ((ReviewInstructor) this).reviewInstructor();
+        } else {
+            System.out.println("Reviewing instructor is not supported for this type of review.");
+        }
     }
 
     private void reviewRecipe() {

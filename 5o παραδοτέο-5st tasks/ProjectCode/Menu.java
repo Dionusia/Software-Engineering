@@ -77,6 +77,12 @@ public class Menu {
             case 7:
                 waterTracker(clients);
                 break;
+            case 8:
+                System.out.println("Set your goals has not be implement it.");
+                break;
+            case 9:
+                rewards();
+                break;
             case 11:
                 logOut();
                 break;
@@ -106,7 +112,6 @@ public class Menu {
         chatMessage.MessageMenu();
     }
 
-    
     private void reviews() {
         Review review = new Review();
         review.reviews();
@@ -117,6 +122,12 @@ public class Menu {
         List<Challenges> challengeList = new ArrayList<>();
         challenges.addSampleData(challengeList);
         challenges.challengesMenu(challengeList);
+    }
+
+    private void rewards() {
+        RewardSystem rewards = new RewardSystem();
+        rewards.addSampleData(rewards);
+        rewards.rewardsMenu();
     }
 
     private void waterTracker(ArrayList<Client> clients) {
