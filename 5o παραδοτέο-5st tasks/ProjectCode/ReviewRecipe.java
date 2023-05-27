@@ -96,11 +96,6 @@ public class ReviewRecipe extends Review {
     
         System.out.println("Review added successfully!");
     }
-
-    public void addReview(Recipes recipe, int rating, String reviewText, User user) {
-        Review review = new Review(rating, reviewText, user);
-        recipe.addReview(review);
-    }
 }
 
 

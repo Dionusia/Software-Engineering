@@ -18,10 +18,6 @@ public class DietaryPreference {
         return suggestedRecipes;
     }
 
-    public void addSuggestedRecipe(Recipes recipe) {
-        suggestedRecipes.add(recipe);
-    }
-
     //for display the name
     @Override
     public String toString() {

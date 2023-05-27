@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Review {
@@ -7,16 +5,14 @@ public class Review {
     private String reviewText;
     protected User user;
     private Scanner scanner;
-    List<Recipes> recipes = new ArrayList<>();
 
-    public Review() {
-        this.scanner = new Scanner(System.in);
-    }
+    public Review() {}
 
     public Review(int rating, String reviewText, User user) {
         this.rating = rating;
         this.reviewText = reviewText;
         this.user = user;
+        this.scanner = new Scanner(System.in);
     }
 
     public void reviews() {

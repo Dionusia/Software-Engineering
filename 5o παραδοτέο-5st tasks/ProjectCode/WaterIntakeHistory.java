@@ -8,10 +8,6 @@ public class WaterIntakeHistory {
         intakeHistory = new ArrayList<>();
     }
 
-    public void addIntake(int amount) {
-        intakeHistory.add(amount);
-    }
-
     public List<Integer> getIntakeHistory() {
         return intakeHistory;
     }
