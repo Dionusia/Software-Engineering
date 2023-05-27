@@ -161,7 +161,6 @@ public class ChatMessage {
         }
     }
 
-
     public void displayChatWindow(String user, String sender) {
         String chatId = getChatId(user, sender);
         // Display chat window for the sender
@@ -175,7 +174,7 @@ public class ChatMessage {
     }
 
     public void notifyUserUnavailable(String user) {
-        //implementation
+        //it has not implement it
     }
 
     public void createGroupChat() {

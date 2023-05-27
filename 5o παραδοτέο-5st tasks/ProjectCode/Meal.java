@@ -1,4 +1,4 @@
-public class Meal {
+public class Meal extends FoodItem {
    public enum MealCategory {
        BREAKFAST,
        LUNCH,

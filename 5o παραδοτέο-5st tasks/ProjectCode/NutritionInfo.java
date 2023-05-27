@@ -1,4 +1,4 @@
-public class NutritionInfo {
+public class NutritionInfo extends FoodItem{
     private int calories;
     private int fat;
     private int cholesterol;

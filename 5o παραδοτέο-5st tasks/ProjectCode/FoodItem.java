@@ -4,6 +4,8 @@ public class FoodItem extends FoodDiary {
     private String notes;
     private String tag;
     
+    public FoodItem(){}
+
     public FoodItem(String name, NutritionInfo nutritionInfo, String notes, String tag) {
     this.name = name;
     this.nutritionInfo = nutritionInfo;
