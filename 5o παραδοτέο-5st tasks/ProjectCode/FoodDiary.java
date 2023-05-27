@@ -471,15 +471,39 @@ public class FoodDiary {
             System.out.println("Your food diary is empty.");
         } else {
             System.out.println("Your food diary:");
+    
+            // Sort meals by food item name
             Collections.sort(meals, new Comparator<Meal>() {
                 @Override
                 public int compare(Meal m1, Meal m2) {
                     return m1.getFoodItem().getName().compareTo(m2.getFoodItem().getName());
                 }
             });
+    
             for (Meal meal : meals) {
-                System.out.println(meal.getFoodName());
+                FoodItem foodItem = meal.getFoodItem();
+                System.out.println("- " + foodItem.getName() + " (" + meal.getCategory() + ")");
             }
+    
+            // Calculate and display summary of nutritional information
+            int totalCalories = meals.stream().mapToInt(meal -> meal.getFoodItem().getNutritionInfo().getCalories()).sum();
+            int totalFat = meals.stream().mapToInt(meal -> meal.getFoodItem().getNutritionInfo().getFat()).sum();
+            int totalCholesterol = meals.stream().mapToInt(meal -> meal.getFoodItem().getNutritionInfo().getCholesterol()).sum();
+            int totalCarbohydrates = meals.stream().mapToInt(meal -> meal.getFoodItem().getNutritionInfo().getCarbohydrates()).sum();
+            int totalFiber = meals.stream().mapToInt(meal -> meal.getFoodItem().getNutritionInfo().getFiber()).sum();
+            int totalProtein = meals.stream().mapToInt(meal -> meal.getFoodItem().getNutritionInfo().getProtein()).sum();
+            int totalVitamins = meals.stream().mapToInt(meal -> meal.getFoodItem().getNutritionInfo().getVitamins()).sum();
+    
+            System.out.println("-------------------------------------------");
+            System.out.println("Summary of Nutritional Information:");
+            System.out.println("Total Calories: " + totalCalories);
+            System.out.println("Total Fat: " + totalFat + "g");
+            System.out.println("Total Cholesterol: " + totalCholesterol + "mg");
+            System.out.println("Total Carbohydrates: " + totalCarbohydrates + "g");
+            System.out.println("Total Fiber: " + totalFiber + "g");
+            System.out.println("Total Protein: " + totalProtein + "g");
+            System.out.println("Total Vitamins: " + totalVitamins);
+            System.out.println("-------------------------------------------");
         }
     }
 }
