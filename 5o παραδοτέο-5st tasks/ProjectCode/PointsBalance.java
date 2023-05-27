@@ -1,4 +1,4 @@
-public class PointsBalance extends RewardSystem {
+public class PointsBalance {
     private int totalPoints;
 
     public PointsBalance() {
