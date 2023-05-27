@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -5,8 +6,17 @@ public class ReviewRecipe extends Review {
     private List<Recipes> recipes;
     private Scanner scanner;
 
-    public ReviewRecipe(List<Recipes> recipes) {
-        this.recipes = recipes;
+    public ReviewRecipe() {
+        recipes = new ArrayList<>();
+
+        // Sample data to run the code
+        Recipes recipe1 = new Recipes();
+        recipe1.setName("Pasta Carbonara");
+        recipes.add(recipe1);
+
+        Recipes recipe2 = new Recipes();
+        recipe2.setName("Chicken Stir Fry");
+        recipes.add(recipe2);
         this.scanner = new Scanner(System.in);
     }
 
@@ -15,14 +25,13 @@ public class ReviewRecipe extends Review {
             System.out.println("No recipes available!");
             return;
         }
-
+    
         System.out.println("Recipe Names:");
         for (int i = 0; i < recipes.size(); i++) {
             Recipes recipe = recipes.get(i);
             System.out.println((i + 1) + ". " + recipe.getName());
         }
-}
-
+    }
     public void reviewRecipe() {
         if (recipes.isEmpty()) {
             System.out.println("No recipes available for review!");
@@ -51,21 +60,34 @@ public class ReviewRecipe extends Review {
     
         Recipes selectedRecipe = recipes.get(recipeIndex - 1);
     
-        System.out.println("Enter your recipe review:");
-        String reviewText = scanner.nextLine();
-        System.out.println("Enter your rating (1-5):");
         int rating;
-        try {
-            rating = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid rating format!");
-            return;
-        }
-    
-        if (rating < 1 || rating > 5) {
-            System.out.println("Invalid rating! Rating should be between 1 and 5.");
-            return;
-        }
+            while (true) {
+                // Prompt the user to rate the instructor
+                System.out.println("Rate the recipe on a scale of 1-5 stars:");
+                rating = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline character
+                
+                // Check if the rating is within the valid range
+                if (rating < 1 || rating > 5) {
+                    System.out.println("Invalid rating. Please enter a number between 1 and 5.");
+                } else {
+                    break;
+                }
+            }
+            
+            String reviewText;
+            while (true) {
+                // Prompt the user to write a review
+                System.out.println("Write a review for the recipe:");
+                reviewText = scanner.nextLine();
+                
+                // Check if the review text is empty
+                if (reviewText.trim().isEmpty()) {
+                    System.out.println("Review text cannot be empty. Please write a review.");
+                } else {
+                    break;
+                }
+            }
     
         Review review = new Review();
         review.setReviewText(reviewText);
@@ -80,6 +102,9 @@ public class ReviewRecipe extends Review {
         recipe.addReview(review);
     }
 }
+
+
+
 
 
 

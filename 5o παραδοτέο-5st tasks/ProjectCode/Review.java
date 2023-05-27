@@ -43,7 +43,7 @@ public class Review {
     }
 
     private void reviewRecipe() {
-        ReviewRecipe reviewRecipe = new ReviewRecipe(recipes);
+        ReviewRecipe reviewRecipe = new ReviewRecipe();
         reviewRecipe.reviewRecipe();
     }  
     

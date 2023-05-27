@@ -101,7 +101,6 @@ public class Menu {
         ChatMessage chatMessage = new ChatMessage();
         chatMessage.MessageMenu();
     }
-
     
     private void reviews() {
         Review review = new Review();

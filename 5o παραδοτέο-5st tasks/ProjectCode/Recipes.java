@@ -33,8 +33,7 @@ public class Recipes {
             System.out.println("4. Share a recipe");
             System.out.println("5. Create a new recipe");
             System.out.println("6. Search recipes by ingredient");
-            System.out.println("7. Rate and review a recipe");
-            System.out.println("8. Back to main menu");
+            System.out.println("7. Back to main menu");
             System.out.println("---------------------------------------");
             int choice = readChoice();
             switch (choice) {
@@ -57,9 +56,6 @@ public class Recipes {
                     searchRecipesByIngredient();
                     break;
                 case 7:
-                    //rate
-                    break;
-                case 8:
                     isRunning = false;
                     break;
                 default:
