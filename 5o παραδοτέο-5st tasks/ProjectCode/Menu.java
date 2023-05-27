@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -67,11 +68,20 @@ public class Menu {
             case 4:
                 chat();
                 break;
+            case 5:
+                challenges();
+                break;
             case 6:
                 reviews();
                 break;
             case 7:
                 waterTracker(clients);
+                break;
+            case 8:
+                System.out.println("Set your goals has not be implement it.");
+                break;
+            case 9:
+                rewards();
                 break;
             case 11:
                 logOut();
@@ -101,10 +111,22 @@ public class Menu {
         ChatMessage chatMessage = new ChatMessage();
         chatMessage.MessageMenu();
     }
-    
     private void reviews() {
         Review review = new Review();
         review.reviews();
+    }
+
+    private void challenges() {
+        Challenges challenges = new Challenges();
+        List<Challenges> challengeList = new ArrayList<>();
+        challenges.addSampleData(challengeList);
+        challenges.challengesMenu(challengeList);
+    }
+
+    private void rewards() {
+        RewardSystem rewards = new RewardSystem();
+        rewards.addSampleData(rewards);
+        rewards.rewardsMenu();
     }
 
     private void waterTracker(ArrayList<Client> clients) {

@@ -7,7 +7,7 @@ public class Client extends User {
     private ActivityLevel activityLevel;
     private HealthGoal goals;
     private String role;
-
+    
     public Client(String username, String password, int age, String gender, int height, double weight,
                   ActivityLevel activityLevel, String dietaryPreferences, HealthGoal goals, String role) {
         super(username, password, role);
