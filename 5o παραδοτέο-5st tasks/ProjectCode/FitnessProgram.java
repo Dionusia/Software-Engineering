@@ -39,4 +39,9 @@ public class FitnessProgram extends RecommendedPrograms {
     public List<String> getExercises() {
         return exercises;
     }
+
+    @Override
+    public String toString() {
+        return getName(); // Assuming `getName()` is the method that returns the program name
+    }
 }

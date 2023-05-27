@@ -6,7 +6,9 @@ public class Review {
     protected User user;
     private Scanner scanner;
 
-    public Review() {}
+    public Review() {
+        this.scanner = new Scanner(System.in);
+    }
 
     public Review(int rating, String reviewText, User user) {
         this.rating = rating;

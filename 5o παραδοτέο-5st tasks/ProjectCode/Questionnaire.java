@@ -107,7 +107,7 @@ public class Questionnaire {
         return answers;
     }
     
-    public static class Question extends Questionnaire {
+    public static class Question {
         private String questionText;
         private boolean required;
         
