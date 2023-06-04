@@ -107,6 +107,7 @@ public class Questionnaire {
         return answers;
     }
     
+    //this class help us manage questions
     public static class Question {
         private String questionText;
         private boolean required;

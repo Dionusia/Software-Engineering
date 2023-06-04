@@ -21,6 +21,7 @@ public class MenuInstructor {
         scanner.close();
     }
 
+    //we haven't implement menu instructor
     private void displayMenu() {
         System.out.println("--------------- MENU INSTRUCTOR ---------------");
         System.out.println("1. Create Meal Plan");

@@ -14,6 +14,7 @@ public class LoginPage {
         Client client1 = new Client("stelios", "1234", 42, "male", 180, 75.0, ActivityLevel.MODERATELY_ACTIVE, "vegetarian", HealthGoal.LOSE_WEIGHT, "client");
         Client client2 = new Client("dionusia", "12314", 21, "male", 180, 60.0, ActivityLevel.MODERATELY_ACTIVE, "vegetarian", HealthGoal.LOSE_WEIGHT, "client");
         Instructor instructor1 = new Instructor("aggelos", "1234", "instructor");
+        //we add a second instructor just for the review
         Instructor instructor2 = new Instructor("nadia", "1234", "instructor");
         clients.add(client1);
         clients.add(client2);

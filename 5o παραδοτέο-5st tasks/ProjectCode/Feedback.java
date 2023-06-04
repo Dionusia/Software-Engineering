@@ -38,6 +38,7 @@ public class Feedback {
         return ratings;
     }
 
+    //calculate average for all ratings
     public double calculateOverallScore(Instructor instructor) {
         List<ReviewInstructor> instructorReviews = getReviewsByInstructor(instructor);
         int totalRatings = instructorReviews.size();
