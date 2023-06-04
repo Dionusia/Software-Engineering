@@ -14,6 +14,14 @@ public class Instructor extends User {
     public void createFitnessPlan(Client client) {
         // creating a personalized fitness plan for the client
     }
+
+    public void modifyMealProgram(DietProgram program) {
+        // modify existing program
+    }
+    
+    public void modifyFitnessProgram(FitnessProgram program) {
+        // modify existing program
+    }
     
     public void manageClientProfile(Client client) {
         // managing the client's profile

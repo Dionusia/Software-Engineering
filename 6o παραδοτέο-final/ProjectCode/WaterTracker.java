@@ -1,5 +1,6 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class WaterTracker {
     private int targetIntake;
@@ -88,7 +89,8 @@ public class WaterTracker {
             System.out.println("\n----------- HISTORY MENU -----------");
             System.out.println("1. Modify Intake");
             System.out.println("2. Delete Intake");
-            System.out.println("3. Exit");
+            System.out.println("3. Select range to display history");
+            System.out.println("4. Exit");
             System.out.println("------------------------------------");
             System.out.print("Enter your choice: ");
 
@@ -103,6 +105,9 @@ public class WaterTracker {
                     deleteIntake();
                     break;
                 case 3:
+                    rangeHistory();
+                    break;
+                case 4:
                     isRunning = false;
                     break;
                 default:
@@ -134,6 +139,18 @@ public class WaterTracker {
         scanner.nextLine();
 
         intakeHistory.deleteIntakeFromHistory(index);
+    }
+
+    private void rangeHistory() {
+        System.out.println("Enter the start date (yyyy-mm-dd):");
+        String startDateString = scanner.nextLine();
+        LocalDate startDate = LocalDate.parse(startDateString);
+    
+        System.out.println("Enter the end date (yyyy-mm-dd):");
+        String endDateString = scanner.nextLine();
+        LocalDate endDate = LocalDate.parse(endDateString);
+    
+        intakeHistory.displayIntakeHistoryForRange(startDate, endDate);
     }
 
     private int readIntInput() {

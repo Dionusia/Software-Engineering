@@ -32,6 +32,7 @@ public class ReviewRecipe extends Review {
             System.out.println((i + 1) + ". " + recipe.getName());
         }
     }
+    
     public void reviewRecipe() {
         if (recipes.isEmpty()) {
             System.out.println("No recipes available for review!");

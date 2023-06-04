@@ -20,6 +20,7 @@ public class Review {
     public void reviews() {
         System.out.println("1. Review Recipe");
         System.out.println("2. Review Instructor");
+        System.out.println("3. Edit a review");
         System.out.print("Enter your choice: ");
         int reviewChoice = Integer.parseInt(scanner.nextLine());
 
@@ -30,6 +31,9 @@ public class Review {
             case 2:
                 reviewInstructor();
                 break;
+                case 3:
+                    editReview();
+                    break;
             default:
                 System.out.println("Invalid choice.");
         }
@@ -44,6 +48,11 @@ public class Review {
         ReviewRecipe reviewRecipe = new ReviewRecipe();
         reviewRecipe.reviewRecipe();
     }  
+
+    public void editReview() {
+        System.out.println("editing has not be implement it");
+        //implementation of editing review
+    }
     
     //getters-setters
     public int getRating() {

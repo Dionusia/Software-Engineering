@@ -34,6 +34,7 @@ public class ReviewInstructor extends Review {
     }
 
     public void reviewInstructor() {
+
         displayRegisteredInstructors();
         
         Feedback feedback = new Feedback();
@@ -89,5 +90,9 @@ public class ReviewInstructor extends Review {
             System.out.println("Review and rating submitted successfully!");
             break;
         }
+    }
+
+    public void editReview() {
+        //implementation of editing review
     }
 }

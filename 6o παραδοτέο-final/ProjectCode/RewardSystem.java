@@ -148,6 +148,15 @@ public class RewardSystem {
         return pointsBalance;
     }
 
+    public void rewardFromChallenge(Challenges challenge){
+        //reward if completed
+    }
+
+    public void shareReward(){
+        //go to share option
+        //it has not be implement it   
+    }
+
     public void addSampleData(RewardSystem rewardSystem) {
         //sample points history
         PointsHistory history1 = new PointsHistory(new Date(), PointsHistory.TransactionType.EARNING, 50, "Completed challenge");
